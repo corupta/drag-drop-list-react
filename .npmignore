@@ -1,2 +1,4 @@
 src
 package-lock.json
+demos
+.gitignore

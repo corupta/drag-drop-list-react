@@ -10,3 +10,4 @@ ftp-sync.json
 stats.json
 .syncrconf
 package-json.lock
+.npmignore
