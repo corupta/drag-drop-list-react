@@ -15,8 +15,9 @@
 .env.development.local
 .env.test.local
 .env.production.local
-package-json.lock
+package-lock.json
 package-json
+.gitignore
 
 npm-debug.log*
 yarn-debug.log*

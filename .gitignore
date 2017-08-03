@@ -9,5 +9,6 @@ sftp-config.json
 ftp-sync.json
 stats.json
 .syncrconf
-package-json.lock
+package-lock.json
 .npmignore
+.gitignore
