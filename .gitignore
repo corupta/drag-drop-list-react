@@ -1,0 +1,11 @@
+node_modules
+dist
+npm-debug.log
+sftp-config.json
+.idea/
+.remote-sync.json
+.vscode/
+.DS_Store
+ftp-sync.json
+stats.json
+.syncrconf
