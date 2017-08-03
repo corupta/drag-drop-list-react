@@ -9,3 +9,4 @@ sftp-config.json
 ftp-sync.json
 stats.json
 .syncrconf
+package-json.lock
