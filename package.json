@@ -1,0 +1,35 @@
+{
+  "name": "drag-drop-list-react",
+  "version": "0.9.0",
+  "description": "A library that implements drag-drop lists for react.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "devDependencies": {
+    "react": "^15.6.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/corupta/drag-drop-list-react.git"
+  },
+  "keywords": [
+    "drag",
+    "drop",
+    "react"
+  ],
+  "author": "corupta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/corupta/drag-drop-list-react/issues"
+  },
+  "homepage": "https://github.com/corupta/drag-drop-list-react#readme"
+}
