@@ -490,7 +490,7 @@ export default class DragList extends React.Component {
     return React.createElement(tag, this.getListProps(),
       typeof this.props.upperElem !== 'undefined' && this.props.upperElem,
       typeof this.props.upperElem !== 'undefined' && <hr />,
-      this.props.children.map((item, i) => (typeof item !== 'undefined') &&
+      typeof this.props.children !== 'undefined' && this.props.children.map((item, i) => (typeof item !== 'undefined') &&
         (<DragItem
           setHeight={this.setHeight}
           trans={{ H: (i >= this.blocker && this.blank !== null ? this.blankHeight : 0), dur: this.transitionDuration }}
