@@ -142,7 +142,7 @@ export default class DragList extends React.Component {
     if (dragData.item !== null && dragData.dragName === this.props.dropName) {
       if (this.blocker === -1) {
         if (this.blank === null) {
-          this.blank = (typeof this.props.dropFunc === 'undefined' ? dragData.item : this.props.dropFunc(dragData.item));
+          this.blank = (typeof this.props.dropFunc === 'undefined' ? dragData.item : this.props.dropFunc(this.props.myGid, dragData.item));
         }
         this.changeBlank(this.props.children.length);
       }
@@ -156,7 +156,7 @@ export default class DragList extends React.Component {
       }
       if (this.blocker !== newId) {
         if (this.blank === null) {
-          this.blank = (typeof this.props.dropFunc === 'undefined' ? dragData.item : this.props.dropFunc(dragData.item));
+          this.blank = (typeof this.props.dropFunc === 'undefined' ? dragData.item : this.props.dropFunc(this.props.myGid, dragData.item));
         }
         this.changeBlank(newId);
       }

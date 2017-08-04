@@ -94,150 +94,6 @@ You can find the most recent version of this guide [here](https://github.com/fac
   - [Moment.js locales are missing](#momentjs-locales-are-missing)
 - [Something Missing?](#something-missing)
 
-## Demos
-
-Check out those demos, to see what that package looks like:
-* Demo 1
-* Demo 2
-* Demo 3
-
-
-## Installing
-
-Use `npm i -g react-drag-drop-list` to install globally, or `npm i react-drag-drop-list` to install it locally to your project.
-
-Or use `npm i -D react-drag-drop-list` to install it to your project as a dev-dependency. (Which, you probably won't want to?)
-
-Although npm installs for you, make sure you have installed its dependencies: `react`, `prop-types` and `react-dom`.
-
-
-## Getting Started
-
-Use `import DragList from 'DragList'` to use it in a React project.
-
-What's more, you can use `import DragList, { getKey() } from 'DragList'` to also use the `getKey()` function, whose behavior is explained below.
-
-
-## Options (Props)
-
-### `myGid` option:
-
-Give a unique id(number) to a list. This field is required. 
-
-Note that, `insertItem` and `removeItem` functions are called as `insertItem(item, myGid, myId)` and `removeItem(myGid, myId)`.
-So instead of a random number, you would most likely start from 0 to the number of listItems.
-
-An example implementation could be like that:
-
-```js
-constructor(props) {
-  this.state = {
-    items: [
-      [],
-      [],
-      []  
-    ]
-  };
-  this.insertItem = this.insertItem.bind(this);
-  this.removeItem = this.removeItem.bind(this);
-}
-insertItem(item, myGid, myId) {
-  const _items = [...this.state.items[myGid]];
-  for (let i = _items.length; i >= myId; --i) {
-    _items[i + 1] = _items[i];
-  }
-  _items[myId] = item;
-  const _allItems = [...this.state.items];
-  _allItems[myGid] = _items;
-  this.setState({
-    items: _allItems
-  });
-}
-removeItem(myGid, myId) {
-  const _items = [...this.state.items[myGid]];
-  for (let i = myId; i < _items.length - 1; ++i) {
-    _items[i] = _items[i + 1];
-  }
-  _items.pop();
-  const _allItems = [...this.state.items];
-  _allItems[myGid] = _items;
-  this.setState({
-    items: _allItems
-  });
-}
-render() {
-  return (
-    <div>
-      <DragList myGid={0} insertItem={this.insertItem} removeItem={this.removeItem} dragName='a' dropName='a'>
-        {this.state.items[0]}
-      </DragList>
-      <DragList myGid={1} insertItem={this.insertItem} removeItem={this.removeItem} dragName='a' dropName='a'>
-        {this.state.items[1]}
-      </DragList>
-      <DragList myGid={2} insertItem={this.insertItem} removeItem={this.removeItem} dragName='a' dropName='a'>
-        {this.state.items[2]}
-      </DragList>
-    </div>
-  );
-}
-```
-
-Important Note: Two dragLists used in the same project should not have the same myGid, even though if they are not children of the same element.
-This issue is fixable, so contact me if that bothers you.   
-
-
-## `clone` option:
-
-An optional value that can be either true or false. (Default is false.)
-
-Determines, whether an items dragged from a list will be duplicated or removed from the list.
-True, for duplication.
-False, for removal.
-
-
-## `dragName` option:
-
-An optional string value that determines to which lists the items dragged from the current list can be dropped.
-If empty, or not entered, the current list is not draggable.
-
-An item dragged from a list whose `dragName` is 'x' can only be dropped to lists whose `dropName` is also 'x'.
-
-For example, if a list's `dragName` and `dropName` are different, items dragged from the list cannot be dropped on the same list. 
-
-(More like `scrollable: false` in other libraries when used like this. But its use is a lot more extended this way.)
-
-
-## `dropName` option:
-
-An optional string value that determines from which lists dragged items can be dropped into current list.
-If empty, or not entered, the current list is not droppable.
-
-An item dragged from a list whose `dragName` is 'x' can only be dropped to lists whose `dropName` is also 'x'.
-
-Currently, one list can have only one `dragName` and only one `dropName`. I can add multiple `dragName/dropName` support later. If you are interested in this, contact me.
-
-
-## `removeItem` option:
-
-  myGid: PropTypes.number.isRequired,
-  clone: PropTypes.number,
-  dragName: PropTypes.string,
-  dropName: PropTypes.string,
-  removeItem: PropTypes.func,
-  insertItem: PropTypes.func,
-  dropFunc: PropTypes.func,
-  style: PropTypes.shape(),
-  animationDuration: PropTypes.func,
-  class: PropTypes.string,
-  upperElem: PropTypes.element,
-  bottomElem: PropTypes.element,
-  scrollWhen: PropTypes.number,
-  scrollSpeed: PropTypes.number,
-  delayOnTouch: PropTypes.number,
-  delayOnMouse: PropTypes.number,
-  rotateFlying: PropTypes.bool
-
-
 ## Updating to New Releases
 
 Create React App is divided into two packages:
@@ -1708,12 +1564,12 @@ that your web app is reliably fast, even on a slow or unreliable network.
 
 If you would prefer not to enable service workers prior to your initial
 production deployment, then remove the call to `serviceWorkerRegistration.register()`
-from [`src/index.js`](example/index.js).
+from [`src/index.js`](src/index.js).
 
 If you had previously enabled service workers in your production deployment and
 have decided that you would like to disable them for all your existing users,
 you can swap out the call to `serviceWorkerRegistration.register()` in
-[`src/index.js`](example/index.js) with a call to `serviceWorkerRegistration.unregister()`.
+[`src/index.js`](src/index.js) with a call to `serviceWorkerRegistration.unregister()`.
 After the user visits a page that has `serviceWorkerRegistration.unregister()`,
 the service worker will be uninstalled.
 
