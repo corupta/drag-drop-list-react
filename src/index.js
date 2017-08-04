@@ -72,12 +72,12 @@ export default class DragList extends React.Component {
     this.itemMarginBottoms = [];
     scrollDetails.step = Math.round(defaultScrollStep * this.props.scrollSpeed);
     if (typeof this.props.upperElem !== 'undefined') {
-      this.upperElem = React.cloneElement(this.props.upperElem, { style: { position: 'sticky', top: 0 } });
+      this.upperElem = <div style={{ position: 'sticky', top: 0 }}>{this.props.upperElem}<hr /></div>;
     } else {
       this.upperElem = null;
     }
     if (typeof this.props.bottomElem !== 'undefined') {
-      this.bottomElem = React.cloneElement(this.props.bottomElem, { style: { position: 'sticky', bottom: 0 } });
+      this.bottomElem = <div style={{ position: 'sticky', bottom: 0}}>{this.props.bottomElem}<hr /></div>;
     } else {
       this.bottomElem = null;
     }
@@ -497,8 +497,7 @@ export default class DragList extends React.Component {
   render() {
     const tag = (typeof this.props.tag === 'undefined' ? 'div' : this.props.tag);
     return React.createElement(tag, this.getListProps(),
-      typeof this.props.upperElem !== 'undefined' && this.props.upperElem,
-      typeof this.props.upperElem !== 'undefined' && <hr />,
+      typeof this.upperElem !== 'undefined' && this.upperElem,
       typeof this.props.children !== 'undefined' && this.props.children.map((item, i) => (typeof item !== 'undefined') &&
         (<DragItem
           setHeight={this.setHeight}
@@ -524,8 +523,7 @@ export default class DragList extends React.Component {
         elemDimensions={dragData.itemDimensions}
         rotate={this.props.rotateFlying}
       >{this.state.flying}</FlyingItem>,
-      typeof this.props.bottomElem !== 'undefined' && <hr />,
-      typeof this.props.bottomElem !== 'undefined' && this.props.bottomElem
+      typeof this.bottomElem !== 'undefined' && this.bottomElem
     );
   }
 }
