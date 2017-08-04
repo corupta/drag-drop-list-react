@@ -156,10 +156,10 @@ export default class App extends React.Component {
       _items[i] = (
       <Item
         myGid={0}
-        title={titles[Math.round(Math.random() * 6)]}
-        desc={descs[Math.round(Math.random() * 6)]}
-        price={prices[Math.round(Math.random() * 7)]}
-        img={urls[Math.round(Math.random() * 6)]}
+        title={titles[Math.round(Math.random() * 5)]}
+        desc={descs[Math.round(Math.random() * 5)]}
+        price={prices[Math.round(Math.random() * 6)]}
+        img={urls[Math.round(Math.random() * 5)]}
         style={Math.round < 0.5 ? itemStyle1 : itemStyle2}
         imgStyle={imgStyle}
         key={getKey()}
@@ -172,7 +172,7 @@ export default class App extends React.Component {
   }
   render() {
     let tot1 = 0.0;
-    this.state.items[1].map((item) => tot1 += item.props.price);
+    this.state.items[1].map((item) => {if (typeof item !== 'undefined') { tot1 += item.props.price; } });
     return (
       <div style={bodyStyle}>
         <div style={mainStyle}>

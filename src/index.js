@@ -462,7 +462,7 @@ export default class DragList extends React.Component {
   }
   dropCallback() {
     if (this.draggedId !== -1) {
-      this.props.removeItem(this.props.myGid, this.draggedId);
+      setTimeout(this.props.removeItem, 4, this.props.myGid, this.draggedId);
     }
     this.draggedId = -1;
   }
@@ -497,7 +497,7 @@ export default class DragList extends React.Component {
   render() {
     const tag = (typeof this.props.tag === 'undefined' ? 'div' : this.props.tag);
     return React.createElement(tag, this.getListProps(),
-      React.createElement('div', { style: { display: 'flex', height: '100%', width: '100%', justifyContent: 'space-between', flexDirection: 'column', overflow: (typeof this.props.style.overflow !== 'undefined' ? this.props.style.overflow : 'auto' } },
+      React.createElement('div', { style: { display: 'flex', height: '100%', width: '100%', justifyContent: 'space-between', flexDirection: 'column', overflow: (typeof this.props.style.overflow !== 'undefined' ? this.props.style.overflow : 'auto') } },
         typeof this.upperElem !== 'undefined' && this.upperElem,
         React.createElement('div', { style: { width: '100%' } },
           typeof this.props.children !== 'undefined' && this.props.children.map((item, i) => (typeof item !== 'undefined') &&
