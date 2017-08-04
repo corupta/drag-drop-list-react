@@ -72,12 +72,12 @@ export default class DragList extends React.Component {
     this.itemMarginBottoms = [];
     scrollDetails.step = Math.round(defaultScrollStep * this.props.scrollSpeed);
     if (typeof this.props.upperElem !== 'undefined') {
-      this.upperElem = <div style={{ display: 'table-row', height: 0 }}>{this.props.upperElem}<hr /></div>;
+      this.upperElem = <div style={{ width: '100%' }}>{this.props.upperElem}<hr /></div>;
     } else {
       this.upperElem = null;
     }
     if (typeof this.props.bottomElem !== 'undefined') {
-      this.bottomElem = <div style={{ display: 'table-row', height: 0 }}><hr />{this.props.bottomElem}</div>;
+      this.bottomElem = <div style={{ width: '100%' }}><hr />{this.props.bottomElem}</div>;
     } else {
       this.bottomElem = null;
     }
@@ -85,6 +85,7 @@ export default class DragList extends React.Component {
   getListProps() {
     const ans = { ref: this.addEvents };
     ans.style = (typeof this.props.style !== 'undefined' ? { ...this.props.style } : {});
+    ans.style.overflow = 'hidden';
     if (typeof this.props.class !== 'undefined') {
       ans.class = this.props.class;
     }
@@ -496,9 +497,9 @@ export default class DragList extends React.Component {
   render() {
     const tag = (typeof this.props.tag === 'undefined' ? 'div' : this.props.tag);
     return React.createElement(tag, this.getListProps(),
-      React.createElement('div', { style: { display: 'table', height: '100%', width: '100%' } },
+      React.createElement('div', { style: { display: 'flex', height: '100%', width: '100%', justifyContent: 'space-between', flexDirection: 'column', overflow: (typeof this.props.style.overflow !== 'undefined' ? this.props.style.overflow : 'auto' } },
         typeof this.upperElem !== 'undefined' && this.upperElem,
-        React.createElement('div', { style: { display: 'table-row', height: '100%' } },
+        React.createElement('div', { style: { width: '100%' } },
           typeof this.props.children !== 'undefined' && this.props.children.map((item, i) => (typeof item !== 'undefined') &&
             (<DragItem
               setHeight={this.setHeight}
