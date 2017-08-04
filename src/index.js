@@ -77,7 +77,7 @@ export default class DragList extends React.Component {
       this.upperElem = null;
     }
     if (typeof this.props.bottomElem !== 'undefined') {
-      this.bottomElem = <div style={{ position: 'sticky', bottom: 0}}>{this.props.bottomElem}<hr /></div>;
+      this.bottomElem = <div style={{ position: 'sticky', bottom: 0}}><hr />{this.props.bottomElem}</div>;
     } else {
       this.bottomElem = null;
     }
@@ -498,7 +498,7 @@ export default class DragList extends React.Component {
     const tag = (typeof this.props.tag === 'undefined' ? 'div' : this.props.tag);
     return React.createElement(tag, this.getListProps(),
       typeof this.upperElem !== 'undefined' && this.upperElem,
-      typeof this.props.children !== 'undefined' && this.props.children.map((item, i) => (typeof item !== 'undefined') &&
+      typeof this.props.children !== 'undefined' && React.createElement('div', {}, this.props.children.map((item, i) => (typeof item !== 'undefined') &&
         (<DragItem
           setHeight={this.setHeight}
           trans={{ H: (i >= this.blocker && this.blank !== null ? this.blankHeight : 0), dur: this.transitionDuration }}
@@ -512,8 +512,7 @@ export default class DragList extends React.Component {
           destroyer={this.draggedId === i}
         >
           {item}
-        </DragItem>)
-      ),
+        </DragItem>))),
       this.blank !== null && <BlankItem
         trans={this.blankH}
       >{this.blank}</BlankItem>,
