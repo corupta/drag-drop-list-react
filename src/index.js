@@ -72,12 +72,12 @@ export default class DragList extends React.Component {
     this.itemMarginBottoms = [];
     scrollDetails.step = Math.round(defaultScrollStep * this.props.scrollSpeed);
     if (typeof this.props.upperElem !== 'undefined') {
-      this.upperElem = <div style={{ display: table-row, height: 0 }}>{this.props.upperElem}<hr /></div>;
+      this.upperElem = <div style={{ display: 'table-row', height: 0 }}>{this.props.upperElem}<hr /></div>;
     } else {
       this.upperElem = null;
     }
     if (typeof this.props.bottomElem !== 'undefined') {
-      this.bottomElem = <div style={{ display: table-row, height: 0 }}><hr />{this.props.bottomElem}</div>;
+      this.bottomElem = <div style={{ display: 'table-row', height: 0 }}><hr />{this.props.bottomElem}</div>;
     } else {
       this.bottomElem = null;
     }
@@ -496,9 +496,9 @@ export default class DragList extends React.Component {
   render() {
     const tag = (typeof this.props.tag === 'undefined' ? 'div' : this.props.tag);
     return React.createElement(tag, this.getListProps(),
-      React.createElement('div', { style: { display: table, height: '100%', width: '100%' } },
+      React.createElement('div', { style: { display: 'table', height: '100%', width: '100%' } },
         typeof this.upperElem !== 'undefined' && this.upperElem,
-        React.createElement('div', { style: { display: table-row, height: '100%' } },
+        React.createElement('div', { style: { display: 'table-row', height: '100%' } },
           typeof this.props.children !== 'undefined' && this.props.children.map((item, i) => (typeof item !== 'undefined') &&
             (<DragItem
               setHeight={this.setHeight}
@@ -524,7 +524,7 @@ export default class DragList extends React.Component {
             elemDimensions={dragData.itemDimensions}
             rotate={this.props.rotateFlying}
           >{this.state.flying}</FlyingItem>
-        )
+        ),
         typeof this.bottomElem !== 'undefined' && this.bottomElem
       )
     );
