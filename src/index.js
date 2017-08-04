@@ -85,7 +85,7 @@ export default class DragList extends React.Component {
   getListProps() {
     const ans = { ref: this.addEvents };
     ans.style = (typeof this.props.style !== 'undefined' ? { ...this.props.style } : {});
-    ans.position = 'relative';
+    ans.style.position = 'relative';
     if (typeof this.props.class !== 'undefined') {
       ans.class = this.props.class;
     }
