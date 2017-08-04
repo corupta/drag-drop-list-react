@@ -72,12 +72,12 @@ export default class DragList extends React.Component {
     this.itemMarginBottoms = [];
     scrollDetails.step = Math.round(defaultScrollStep * this.props.scrollSpeed);
     if (typeof this.props.upperElem !== 'undefined') {
-      this.upperElem = <div style={{ position: 'sticky', top: 0 }}>{this.props.upperElem}<hr /></div>;
+      this.upperElem = <div style={{ display: table-row, height: 0 }}>{this.props.upperElem}<hr /></div>;
     } else {
       this.upperElem = null;
     }
     if (typeof this.props.bottomElem !== 'undefined') {
-      this.bottomElem = <div style={{ position: 'sticky', bottom: 0}}><hr />{this.props.bottomElem}</div>;
+      this.bottomElem = <div style={{ display: table-row, height: 0 }}><hr />{this.props.bottomElem}</div>;
     } else {
       this.bottomElem = null;
     }
@@ -85,7 +85,6 @@ export default class DragList extends React.Component {
   getListProps() {
     const ans = { ref: this.addEvents };
     ans.style = (typeof this.props.style !== 'undefined' ? { ...this.props.style } : {});
-    ans.style.position = 'relative';
     if (typeof this.props.class !== 'undefined') {
       ans.class = this.props.class;
     }
@@ -497,32 +496,37 @@ export default class DragList extends React.Component {
   render() {
     const tag = (typeof this.props.tag === 'undefined' ? 'div' : this.props.tag);
     return React.createElement(tag, this.getListProps(),
-      typeof this.upperElem !== 'undefined' && this.upperElem,
-      typeof this.props.children !== 'undefined' && React.createElement('div', {}, this.props.children.map((item, i) => (typeof item !== 'undefined') &&
-        (<DragItem
-          setHeight={this.setHeight}
-          trans={{ H: (i >= this.blocker && this.blank !== null ? this.blankHeight : 0), dur: this.transitionDuration }}
-          key={i}
-          setRelatives={(stl) => { dragData.relativeX = stl.left; dragData.relativeY = stl.top; }}
-          onSthDown={this.handleStart}
-          onSthEnter={this.handleEnterItem}
-          onsupertouchmove={this.moveFlyingScrollList}
-          myId={i}
-          myGid={this.props.myId}
-          destroyer={this.draggedId === i}
-        >
-          {item}
-        </DragItem>))),
-      this.blank !== null && <BlankItem
-        trans={this.blankH}
-      >{this.blank}</BlankItem>,
-      this.state.flying !== null && <FlyingItem
-        left={this.state.currX}
-        top={this.state.currY}
-        elemDimensions={dragData.itemDimensions}
-        rotate={this.props.rotateFlying}
-      >{this.state.flying}</FlyingItem>,
-      typeof this.bottomElem !== 'undefined' && this.bottomElem
+      React.createElement('div', { style: { display: table, height: '100%', width: '100%' } },
+        typeof this.upperElem !== 'undefined' && this.upperElem,
+        React.createElement('div', { style: { display: table-row, height: '100%' } },
+          typeof this.props.children !== 'undefined' && this.props.children.map((item, i) => (typeof item !== 'undefined') &&
+            (<DragItem
+              setHeight={this.setHeight}
+              trans={{ H: (i >= this.blocker && this.blank !== null ? this.blankHeight : 0), dur: this.transitionDuration }}
+              key={i}
+              setRelatives={(stl) => { dragData.relativeX = stl.left; dragData.relativeY = stl.top; }}
+              onSthDown={this.handleStart}
+              onSthEnter={this.handleEnterItem}
+              onsupertouchmove={this.moveFlyingScrollList}
+              myId={i}
+              myGid={this.props.myId}
+              destroyer={this.draggedId === i}
+            >
+              {item}
+            </DragItem>)
+          ),
+          this.blank !== null && <BlankItem
+            trans={this.blankH}
+          >{this.blank}</BlankItem>,
+          this.state.flying !== null && <FlyingItem
+            left={this.state.currX}
+            top={this.state.currY}
+            elemDimensions={dragData.itemDimensions}
+            rotate={this.props.rotateFlying}
+          >{this.state.flying}</FlyingItem>
+        )
+        typeof this.bottomElem !== 'undefined' && this.bottomElem
+      )
     );
   }
 }
