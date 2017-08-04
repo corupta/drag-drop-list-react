@@ -1,13 +1,17 @@
 import React from 'react';
-import DragList, { getKey } from 'drag-drop-list-react';
+import DragDrop, { getKey } from './src/index';
 
 import Item from './Item';
 
 const imgStyle = {
   height: 100,
   width: 100,
-  margin: 'auto',
-  padding: 8
+};
+
+const itemImgStyle = {
+  ...imgStyle,
+  float: 'left',
+  margin: '0 8px 8px'
 };
 
 const bodyStyle = {
@@ -20,39 +24,43 @@ const bodyStyle = {
 const mainStyle = {
   width: 800,
   margin: '40px auto',
-  background: '#f0ffee',
+  background: '#eeffff',
   border: '3px solid black',
   boxShadow: '0 0 24px #888888',
-  WebkitBoxShadow: '0 0 24px #888888'
+  WebkitBoxShadow: '0 0 24px #888888',
+  textAlign: 'center'
 };
 
 const listStyle1 = {
   width: 250,
   background: '#ffe1f0',
-  height: 600,
+  height: 800,
   overflow: 'auto',
   margin: 20,
   border: '2px solid black',
-  display: 'inline-block'
+  display: 'inline-block',
+  verticalAlign: 'top'
 };
 
 const listStyle2 = {
-  width: 150,
+  width: 200,
   background: '#efffdf',
-  height: 600,
+  height: 800,
   overflow: 'auto',
   margin: 20,
   border: '3px groove red',
-  display: 'inline-block'
+  display: 'inline-block',
+  verticalAlign: 'top'
 };
 
 const listStyle3 = {
-  width: 120,
+  width: 150,
   background: '#dfefff',
-  height: 600,
+  height: 800,
   margin: 20,
   border: '3px groove yellow',
-  display: 'inline-block'
+  display: 'inline-block',
+  verticalAlign: 'top'
 };
 
 const itemStyle1 = {
@@ -61,7 +69,7 @@ const itemStyle1 = {
   marginBottom: 40,
   border: '1px solid black',
   background: '#ccddee',
-  color: '#ffeedd'
+  color: '#886644'
 };
 
 const itemStyle2 = {
@@ -69,19 +77,19 @@ const itemStyle2 = {
   margin: 'auto',
   marginBottom: 40,
   border: '2px groove red',
-  bakcground: '#eeddcc',
-  color: '#ddeeff'
+  background: '#eeddcc',
+  color: '#446688'
 };
 
 const myCart = (
-  <div>
+  <div style={{ textAlign: 'center' }}>
     <img alt='myCart' src='https://d30y9cdsu7xlg0.cloudfront.net/png/28468-200.png' style={imgStyle} />
     <h2>My Cart!</h2>
   </div>
 );
 
 const trash = (
-  <div>
+  <div style={{ textAlign: 'center' }}>
     <img alt='trash' src='http://downloadicons.net/sites/default/files/open--trash-can-icon-80062.png' style={imgStyle} />
     <h2>Trash</h2>
   </div>
@@ -92,6 +100,8 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       items: [
+        [],
+        [],
         [],
         []
       ]
@@ -104,20 +114,15 @@ export default class App extends React.Component {
     this.createSomeItems();
   }
   onDrop(myGid, item) {
-    let newItem;
-    switch (myGid) {
-      case 0:
-        newItem = React.cloneElement(item, { myGid: 0, style: { width: 200 } });
-        break;
-      default:
-        newItem = React.cloneElement(item, { myGid: 1, style: { width: 100 } });
+    if (myGid === 1 || myGid === 3) {
+      return React.cloneElement(item, {style: {...item.props.style, width: 150}});
     }
-    return newItem;
+    return React.cloneElement(item, {style: {...item.props.style, width: 120}});
   }
   insertItem(item, myGid, myId) {
     const _items = [...this.state.items[myGid]];
-    for (let i = _items.length; i >= myId; --i) {
-      _items[i + 1] = _items[i];
+    for (let i = _items.length; i > myId; --i) {
+      _items[i] = _items[i - 1];
     }
     _items[myId] = item;
     const _allItems = [...this.state.items];
@@ -150,41 +155,68 @@ export default class App extends React.Component {
       'https://cdn.shopify.com/s/files/1/0113/9052/products/9.jpeg',
       'https://i.ebayimg.com/00/s/MjM2WDMxNQ==/z/cG4AAOSwnQhXoNRO/$_57.JPG'
     ];
-    const _items = [];
-    const maxn = 20;
+    const _items = [[],[],[],[]];
+    const maxn = 12;
     for (let i = 0; i < maxn; ++i) {
-      _items[i] = (
-      <Item
-        myGid={0}
-        title={titles[Math.round(Math.random() * 5)]}
-        desc={descs[Math.round(Math.random() * 5)]}
-        price={prices[Math.round(Math.random() * 6)]}
-        img={urls[Math.round(Math.random() * 5)]}
-        style={Math.round < 0.5 ? itemStyle1 : itemStyle2}
-        imgStyle={imgStyle}
-        key={getKey()}
+      _items[0][i] = (
+        <Item
+          title={titles[Math.round(Math.random() * 5)]}
+          desc={descs[Math.round(Math.random() * 5)]}
+          price={prices[Math.round(Math.random() * 6)]}
+          img={urls[Math.round(Math.random() * 5)]}
+          style={Math.random() < 0.5 ? itemStyle1 : itemStyle2}
+          imgStyle={itemImgStyle}
+          key={getKey()}
+        />
+      );
+      _items[2][i] = (
+        <Item
+          title={titles[Math.round(Math.random() * 5)]}
+          desc={descs[Math.round(Math.random() * 5)]}
+          price={prices[Math.round(Math.random() * 6)]}
+          img={urls[Math.round(Math.random() * 5)]}
+          style={Math.random() < 0.5 ? itemStyle1 : itemStyle2}
+          imgStyle={itemImgStyle}
+          key={getKey()}
         />
       );
     }
     this.setState({
-     items: [ _items, [] ]
+     items: _items
     });
   }
   render() {
     let tot1 = 0.0;
-    this.state.items[1].map((item) => {if (typeof item !== 'undefined') { tot1 += item.props.price; } });
+    this.state.items[1].map((item) => tot1 += item.props.price);
+    const tot1elem = <h2>$ {tot1.toFixed(2)}</h2>
     return (
       <div style={bodyStyle}>
         <div style={mainStyle}>
-          <DragList myGid={0} clone={true} dragName='a' dropFunc={this.onDrop} insertItem={this.insertItem} removeItem={this.removeItem}
-                    style={listStyle1} upperElem={<h2>Items For Sale!</h2>}>
-            {this.state.items[0]}
-          </DragList>
-          <DragList myGid={1} dragName='a' dropName='a' dropFunc={this.onDrop} insertItem={this.insertItem} removeItem={this.removeItem}
-                    style={listStyle2} bottomElem={<h2>{tot1}</h2>} upperElem={myCart}>
-            {this.state.items[1]}
-          </DragList>
-          <DragList myGid={-1} dropName='a' style={listStyle3} upperElem={trash}/>
+          <div>
+            <DragDrop myGid={0} clone={true} dragName='a' dropFunc={this.onDrop} insertItem={this.insertItem}
+                      style={listStyle1} upperElem={<h2>Items For Sale!</h2>}>
+              {this.state.items[0]}
+            </DragDrop>
+            <DragDrop myGid={1} dragName='a' dropName='a' dropFunc={this.onDrop} insertItem={this.insertItem} removeItem={this.removeItem}
+                      style={listStyle2} bottomElem={tot1elem} upperElem={myCart}>
+              {this.state.items[1]}
+            </DragDrop>
+            <DragDrop myGid={-1} dropName='a' style={listStyle3} upperElem={trash}/>
+          </div>
+          <br />
+          <hr />
+          <br />
+          <div>
+            <DragDrop myGid={2} clone={true} dragName='b' dropFunc={this.onDrop} insertItem={this.insertItem}
+                      style={listStyle1} upperElem={<h2>Items For Sale!</h2>}>
+              {this.state.items[0]}
+            </DragDrop>
+            <DragDrop myGid={3} dragName='b' dropName='b' dropFunc={this.onDrop} insertItem={this.insertItem} removeItem={this.removeItem}
+                      style={listStyle2} bottomElem={tot1elem} upperElem={myCart}>
+              {this.state.items[1]}
+            </DragDrop>
+            <DragDrop myGid={-2} dropName='b' style={listStyle3} upperElem={trash}/>
+          </div>
         </div>
       </div>
     );
