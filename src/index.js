@@ -71,12 +71,21 @@ export default class DragList extends React.Component {
     this.itemMarginTops = [];
     this.itemMarginBottoms = [];
     scrollDetails.step = Math.round(defaultScrollStep * this.props.scrollSpeed);
+    if (typeof this.props.upperElem !== 'undefined') {
+      this.upperElem = React.cloneElement(this.props.upperElem, { style: { position: 'sticky', top: 0 } });
+    } else {
+      this.upperElem = null;
+    }
+    if (typeof this.props.bottomElem !== 'undefined') {
+      this.bottomElem = React.cloneElement(this.props.bottomElem, { style: { position: 'sticky', bottom: 0 } });
+    } else {
+      this.bottomElem = null;
+    }
   }
   getListProps() {
     const ans = { ref: this.addEvents };
-    if (typeof this.props.style !== 'undefined') {
-      ans.style = { ...this.props.style };
-    }
+    ans.style = (typeof this.props.style !== 'undefined' ? { ...this.props.style } : {});
+    ans.position = relative;
     if (typeof this.props.class !== 'undefined') {
       ans.class = this.props.class;
     }

@@ -1,25 +1,29 @@
 import React from 'react';
-import DragList from 'drag-drop-list-react';
+import DragList, { getKey } from 'drag-drop-list-react';
 
 import Item from './Item';
 
 const imgStyle = {
   height: 100,
-  width: 100
+  width: 100,
+  margin: 'auto',
+  padding: 8
 };
 
 const bodyStyle = {
   width: '100%',
   height: '100%',
-  background: '#f0fff5'
+  background: '#f0fff5',
+  position: 'absolute'
 };
 
 const mainStyle = {
-  width: 600,
+  width: 800,
+  margin: '40px auto',
   background: '#f0ffee',
   border: '3px solid black',
-  boxShadow: '0 0 10px #888888',
-  WebkitBoxShadow: '0 0 10px #888888'
+  boxShadow: '0 0 24px #888888',
+  WebkitBoxShadow: '0 0 24px #888888'
 };
 
 const listStyle1 = {
@@ -28,7 +32,8 @@ const listStyle1 = {
   height: 600,
   overflow: 'auto',
   margin: 20,
-  border: '2px solid black'
+  border: '2px solid black',
+  display: 'inline-block'
 };
 
 const listStyle2 = {
@@ -37,15 +42,17 @@ const listStyle2 = {
   height: 600,
   overflow: 'auto',
   margin: 20,
-  border: '3px groove red'
+  border: '3px groove red',
+  display: 'inline-block'
 };
 
 const listStyle3 = {
-  width: 100,
+  width: 120,
   background: '#dfefff',
   height: 600,
   margin: 20,
-  border: '3px groove yellow'
+  border: '3px groove yellow',
+  display: 'inline-block'
 };
 
 const itemStyle1 = {
@@ -155,6 +162,7 @@ export default class App extends React.Component {
         img={urls[Math.round(Math.random() * 6)]}
         style={Math.round < 0.5 ? itemStyle1 : itemStyle2}
         imgStyle={imgStyle}
+        key={getKey()}
         />
       );
     }
@@ -167,7 +175,7 @@ export default class App extends React.Component {
     this.state.items[1].map((item) => tot1 += item.props.price);
     return (
       <div style={bodyStyle}>
-        <div styl={mainStyle}>
+        <div style={mainStyle}>
           <DragList myGid={0} clone={true} dragName='a' dropFunc={this.onDrop} insertItem={this.insertItem} removeItem={this.removeItem}
                     style={listStyle1} upperElem={<h2>Items For Sale!</h2>}>
             {this.state.items[0]}
