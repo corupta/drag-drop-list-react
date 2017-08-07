@@ -30,6 +30,7 @@ let dragData = {
     y: 42
   },
   currList: 42,
+  isInList: false,
   upState: null
 };
 
@@ -230,8 +231,8 @@ export default class DragList extends React.Component {
   maybeScrollPage() {
     const currX = Math.round(window.scrollX || window.pageXOffset);
     const currY = Math.round(window.scrollY || window.pageYOffset);
-    const pageH = document.body.scrollHeight - window.innerHeight;
-    const pageW = document.body.scrollWidth - window.innerWidth;
+    const pageH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight) - window.innerHeight;
+    const pageW = Math.max(document.body.scrollWidth, document.documentElement.scrollWidth) - window.innerWidth;
     if (dragData.ePos.x - this.props.scrollWhen < 0) {
       window.scrollTo(Math.max(0, currX - scrollDetails.step), currY);
     }
@@ -280,23 +281,27 @@ export default class DragList extends React.Component {
     }
   }
   moveFlying(item, listScrollCallback, newListId) {
-    if (dragData.currList !== newListId) {
-      if (dragData.currList !== -15841584) {
+    if (item === null || dragData.isInList === false || dragData.currList !== newListId) {
+      if (dragData.isInList) {
         dragData.target.dispatchEvent(new Event('leaveMeh', { bubbles: true }));
       }
       dragData.currList = newListId;
+      dragData.isInList = true;
       dragData.scrollListCallback = listScrollCallback;
+      if (item === null) {
+        dragData.isInList = false;
+      }
     }
     if (dragData.target !== item) {
       dragData.target = item;
       if (dragData.target !== null) {
-        console.log('enterMeh');
+        //console.log('enterMeh');
         dragData.target.dispatchEvent(new Event('enterMeh', { bubbles: true }));
       }
     }
   }
   moveFlyingBody() {
-    this.moveFlying(null, null, -15841584);
+    this.moveFlying(null, null, -1);
   }
   moveFlyingScrollList(elem) {
     this.moveFlying(elem, this.maybeScrollList, this.props.myGid);
@@ -307,7 +312,7 @@ export default class DragList extends React.Component {
   }
   moveFlyingBodyHax(e) {
     if (dragData.item !== null) {
-      console.log(e);
+      //console.log(e);
       dragData.ePos = (dragData.isTouchOrMouse ? { x: e.touches.item(0).clientX, y: e.touches.item(0).clientY } : { x: e.clientX, y: e.clientY });
       e.preventDefault();
       e.stopPropagation();
@@ -388,6 +393,7 @@ export default class DragList extends React.Component {
   handleStartContinue(id, stl, downNo, elemDimensions) {
     if (downNo === this.downNo) {
       dragData.currList = this.props.myGid;
+      dragData.isInList = true;
       dragData.target = this.me;
       dragData.dropCallback = this.dropCallback;
       dragData.dragName = this.props.dragName;
@@ -518,7 +524,6 @@ export default class DragList extends React.Component {
 
 DragList.PropTypes = {
   myGid: PropTypes.number.isRequired,
-  clone: PropTypes.number,
   dragName: PropTypes.string,
   dropName: PropTypes.string,
   removeItem: PropTypes.func,

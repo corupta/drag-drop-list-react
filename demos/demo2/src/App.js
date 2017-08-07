@@ -1,5 +1,5 @@
 import React from 'react';
-import DragDrop, { getKey } from 'drag-drop-list-react';
+import DragDrop, { getKey } from 'drag-drop-list-react';//'./src/index';
 
 import Item from './Item';
 
@@ -115,9 +115,9 @@ export default class App extends React.Component {
   }
   onDrop(myGid, item) {
     if (myGid === 1 || myGid === 3) {
-      return React.cloneElement(item, {style: {...item.props.style, width: 150}});
+      return React.cloneElement(item, { style: { ...item.props.style, width: 150 }});
     }
-    return React.cloneElement(item, {style: {...item.props.style, width: 120}});
+    return React.cloneElement(item, { style: { ...item.props.style, width: 120 }});
   }
   insertItem(item, myGid, myId) {
     const _items = [...this.state.items[myGid]];
@@ -201,7 +201,7 @@ export default class App extends React.Component {
                       style={listStyle2} bottomElem={tot1elem} upperElem={myCart}>
               {this.state.items[1]}
             </DragDrop>
-            <DragDrop myGid={-1} dropName='a' style={listStyle3} upperElem={trash}/>
+            <DragDrop myGid={-1} dropName='a' dropFunc={this.onDrop} style={listStyle3} upperElem={trash}/>
           </div>
           <br />
           <hr />
@@ -209,13 +209,13 @@ export default class App extends React.Component {
           <div>
             <DragDrop myGid={2} clone={true} dragName='b' dropFunc={this.onDrop} insertItem={this.insertItem}
                       style={listStyle1} upperElem={<h2>Items For Sale!</h2>}>
-              {this.state.items[0]}
+              {this.state.items[2]}
             </DragDrop>
             <DragDrop myGid={3} dragName='b' dropName='b' dropFunc={this.onDrop} insertItem={this.insertItem} removeItem={this.removeItem}
                       style={listStyle2} bottomElem={tot1elem} upperElem={myCart}>
-              {this.state.items[1]}
+              {this.state.items[3]}
             </DragDrop>
-            <DragDrop myGid={-2} dropName='b' style={listStyle3} upperElem={trash}/>
+            <DragDrop myGid={-2} dropName='b' dropFunc={this.onDrop} style={listStyle3} upperElem={trash}/>
           </div>
         </div>
       </div>

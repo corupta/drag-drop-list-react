@@ -53,7 +53,6 @@ export default class DragDrop extends React.Component {
         (
         <DragList
           myGid={this.props.myGid}
-          clone={this.props.clone}
           dragName={this.props.dragName}
           dropName={this.props.dropName}
           removeItem={this.props.removeItem}
@@ -79,7 +78,6 @@ export default class DragDrop extends React.Component {
 
 DragList.PropTypes = {
   myGid: PropTypes.number.isRequired,
-  clone: PropTypes.number,
   dragName: PropTypes.string,
   dropName: PropTypes.string,
   removeItem: PropTypes.func,
