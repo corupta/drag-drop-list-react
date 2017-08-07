@@ -7,7 +7,27 @@ Check out the awesome, and very easy to use react component for creating a dragd
 - [Demos](#demos)
 - [Installing](#installing)
 - [Getting Started](#getting-started)
-- [Options](#options-(props))
+- [Options (Props)](#options-props)
+    - [`myGid` option:](#mygid-option)
+    - [`dragName` option:](#dragname-option)
+    - [`dropName` option:](#dropname-option)
+    - [`removeItem` option:](#removeitem-option)
+    - [`insertItem` option:](#insertitem-option)
+    - [`dropFunc` option:](#dropfunc-option)
+    - [`style` option:](#style-option)
+    - [`animationDuration` option](#animationduration-option)
+    - [`class` option:](#class-option)
+    - [`topElem` option:](#topelem-option)
+    - [`bottomElem` option:](#bottomelem-option)
+    - [`topElemSticks` option:](#topelemsticks-option)
+    - [`bottomElemSticks` option:](#bottomelemsticks-option)
+    - [`scrollWhen` option:](#scrollwhen-option)
+    - [`scrollSpeed` option:](#scrollspeed-option)
+    - [`delayOnTouch` option:](#delayontouch-option)
+    - [`delayOnMouse` option:](#delayonmouse-option)
+    - [`rotateFlying` option:](#rotateflying-option)
+- [Children](#children)
+- [Understanding How It Works](#understanding-how-it-works) 
 
 ## Demos
 
@@ -102,7 +122,7 @@ This issue is fixable, so contact me if that bothers you.
 
 
 
-## `dragName` option:
+### `dragName` option:
 
 An optional string value that determines to which lists the items dragged from the current list can be dropped.
 If empty, or not entered, the current list is not draggable.
@@ -114,7 +134,7 @@ For example, if a list's `dragName` and `dropName` are different, items dragged 
 (More like `scrollable: false` in other libraries when used like this. But its use is a lot more extended this way.)
 
 
-## `dropName` option:
+### `dropName` option:
 
 An optional string value that determines from which lists dragged items can be dropped into current list.
 If empty, or not entered, the current list is not droppable.
@@ -124,7 +144,7 @@ An item dragged from a list whose `dragName` is 'x' can only be dropped to lists
 Currently, one list can have only one `dragName` and only one `dropName`. I can add multiple `dragName/dropName` support later. If you are interested in this, contact me.
 
 
-## `removeItem` option:
+### `removeItem` option:
 
 An optional function that is called like `removeItem(myGid, myId);` when an item is removed from the list
 
@@ -133,7 +153,7 @@ Don't pass this value if you want to make a list clonable. (Meaning, the items w
 (Not passing this function is similar to making `clone: true` in similar libraries.)
 
 
-## `insertItem` option:
+### `insertItem` option:
 
 An optional function that is called like `insertItem(item, myGid, myId);` when an item is inserted to a list.
 
@@ -141,7 +161,7 @@ Important Note: if there's an dropFunc function passed to the list that an item 
 the function is actually called as `insertItem(dropFunc(myGid, item), myGid, myId);`
 
 
-## `dropFunc` option:
+### `dropFunc` option:
 
 An optional function that is called when a dragged item is dragged to a droppable list 
 (whose `dropName` equals the `dragName` of the list from which the item was dragged) and creates a blank item (ghost item) in the list (result of the `dropFunc(myGid, item)`)
@@ -154,57 +174,57 @@ dropFunc(myGid, item) {
 ```
 
 
-## `style` option:
+### `style` option:
 
 An optional prop where you can pass style objects for the list. (camelCase - react style).
 
 
-## `animationDuration` option:
+### `animationDuration` option:
 
 An optional number specifying the milliseconds it should take each item to animate to their new position when their position changes.
 
 Default value is 250.
 
 
-## `class` option:
+### `class` option:
 
 Similar to most `className` props, this option is used to pass class name string to the list. Optional.
 
 
-## `topElem` option:
+### `topElem` option:
 
 Optional prop to pass a jsx or html element that will stick to the top of the list if `topElemSticks` is true, or just be put in the top of the list if `topElemSticks` is false.
 A <hr /> element will be added afterwards that element in the list.
 This element will not be draggable!
 
 
-## `bottomElem` option:
+### `bottomElem` option:
 
 Optional prop to pass a jsx or html element that will stick to the bottom of the list if `bottomElemSticks` is true, or just be put in the bottom of the list if `bottomElemSticks` is false.
 A <hr /> element will be added before that element in the list.
 This element will not be draggable!
 
 
-## `topElemSticks` option:
+### `topElemSticks` option:
 
 An optional prop specifying whether the `topElem` should stick to the top of the list or just be at the top of the list.
 Default value is true.
 
 
-## `bottomElemSticks` option:
+### `bottomElemSticks` option:
 
 An optional prop specifying whether the `bottomElem` should stick to the bottom of the list or just be at the bottom of the list.
 Default value is true.
 
 
-## `scrollWhen` option:
+### `scrollWhen` option:
 
 An optional number, specifying the number of pixels distance, that pointer has to be when an item is being dragged, in order to scroll.
 (left of page, top of page, bottom of page, right of page, left of a list, top of a list, bottom of a list, right of a list) 
 Default value is 48.
 
 
-## `scrollSpeed` option:
+### `scrollSpeed` option:
 
 An optional float number, specifying the speed of scroll.
 
@@ -213,7 +233,7 @@ Sample Values: 0.5 for X0.5 speed, 1.5 for X1.5 speed, 2.0 for X2 speed, 3.25123
 Default value is 1.0
 
 
-## `delayOnTouch` option:
+### `delayOnTouch` option:
 
 An optional number specifying number of milliseconds, the user must keep touching the same item before the drag is started. 
 
@@ -224,7 +244,7 @@ It is a good idea to use this when there's no margin in a list, but a user has t
 Default value is 400.
 
 
-## `delayOnMouse` option:
+### `delayOnMouse` option:
 
 An optional number specifying number of milliseconds, the user must keep pressing the mouse-left-click on the same item before the drag is started.
 
@@ -235,7 +255,7 @@ Honestly, I'm not sure, what would be a good use case for this. I've only implem
 Default value is 0.
 
 
-## `rotateFlying` option:
+### `rotateFlying` option:
 
 An optional bool, specifying whether or not items dragged from this list should be rotated 6 degrees clockwise when being dragged. (Affects only the flying element)
 
@@ -244,7 +264,7 @@ Default is true.
 Contact me if you think you need a rotation other than 6 degree, I can change this value to a number in a future release, so that it would specify the number of degrees.
 
 
-# Children
+## Children
 
 Perhaps, the most important field.
 
@@ -257,7 +277,7 @@ Perhaps, the most important field.
 That's a very very simple use case. Items in the DragDrop List should be given as a children that consists of an array of jsx objects / html elements.
 
 
-# Understanding How It Works
+## Understanding How It Works
 
 Check out the codes of the demos, to see some examples and get a basic understanding of how this library works.
 
