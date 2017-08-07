@@ -1,5 +1,5 @@
 import React from 'react';
-import DragDrop, { getKey } from 'drag-drop-list-react';//'./src/index';
+import DragDrop, { getKey } from './src/index';//'drag-drop-list-react';
 
 import Item from './Item';
 
@@ -65,7 +65,7 @@ const listStyle3 = {
 
 const itemStyle1 = {
   width: 200,
-  margin: 'auto',
+  margin: '10%',
   marginBottom: 40,
   border: '1px solid black',
   background: '#ccddee',
@@ -74,7 +74,7 @@ const itemStyle1 = {
 
 const itemStyle2 = {
   width: 200,
-  margin: 'auto',
+  margin: 20,
   marginBottom: 40,
   border: '2px groove red',
   background: '#eeddcc',
@@ -189,33 +189,36 @@ export default class App extends React.Component {
     let tot1 = 0.0;
     this.state.items[1].map((item) => tot1 += item.props.price);
     const tot1elem = <h2>$ {tot1.toFixed(2)}</h2>
+    let tot2 = 0.0;
+    this.state.items[3].map((item) => tot2 += item.props.price);
+    const tot2elem = <h2>$ {tot2.toFixed(2)}</h2>
     return (
       <div style={bodyStyle}>
         <div style={mainStyle}>
           <div>
-            <DragDrop myGid={0} clone={true} dragName='a' dropFunc={this.onDrop} insertItem={this.insertItem}
-                      style={listStyle1} upperElem={<h2>Items For Sale!</h2>}>
+            <DragDrop myGid={0} dragName='a' dropFunc={this.onDrop} insertItem={this.insertItem}
+                      style={listStyle1} topElem={<h2>Items For Sale!</h2>}>
               {this.state.items[0]}
             </DragDrop>
             <DragDrop myGid={1} dragName='a' dropName='a' dropFunc={this.onDrop} insertItem={this.insertItem} removeItem={this.removeItem}
-                      style={listStyle2} bottomElem={tot1elem} upperElem={myCart}>
+                      style={listStyle2} bottomElem={tot1elem} topElem={myCart} bottomElemSticks={false} topElemSticks={false}>
               {this.state.items[1]}
             </DragDrop>
-            <DragDrop myGid={-1} dropName='a' dropFunc={this.onDrop} style={listStyle3} upperElem={trash}/>
+            <DragDrop myGid={-1} dropName='a' dropFunc={this.onDrop} style={listStyle3} topElem={trash}/>
           </div>
           <br />
           <hr />
           <br />
           <div>
             <DragDrop myGid={2} clone={true} dragName='b' dropFunc={this.onDrop} insertItem={this.insertItem}
-                      style={listStyle1} upperElem={<h2>Items For Sale!</h2>}>
+                      style={listStyle1} topElem={<h2>Items For Sale!</h2>}>
               {this.state.items[2]}
             </DragDrop>
             <DragDrop myGid={3} dragName='b' dropName='b' dropFunc={this.onDrop} insertItem={this.insertItem} removeItem={this.removeItem}
-                      style={listStyle2} bottomElem={tot1elem} upperElem={myCart}>
+                      style={listStyle2} bottomElem={tot2elem} topElem={myCart} rotateFlying={false}>
               {this.state.items[3]}
             </DragDrop>
-            <DragDrop myGid={-2} dropName='b' dropFunc={this.onDrop} style={listStyle3} upperElem={trash}/>
+            <DragDrop myGid={-2} dropName='b' dropFunc={this.onDrop} style={listStyle3} topElem={trash}/>
           </div>
         </div>
       </div>

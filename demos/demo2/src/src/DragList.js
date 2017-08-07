@@ -19,7 +19,7 @@ let dragData = {
   mySpecs: {
     height: 42,
     marginTop: 42,
-    maginBottom: 42
+    marginBottom: 42
   },
   relativeX: 42,
   relativeY: 42,
@@ -66,11 +66,15 @@ export default class DragList extends React.Component {
     this.itemMarginTops = [];
     this.itemMarginBottoms = [];
     scrollDetails.step = Math.round(defaultScrollStep * (nextProps.scrollSpeed === 'undefined' ? this.props.scrollSpeed : nextProps.scrollSpeed));
+    this.clone = typeof nextProps.removeItem === 'undefined';
   }
   getListProps() {
     const ans = { ref: this.addEvents };
     ans.style = (typeof this.props.style !== 'undefined' ? { ...this.props.style } : {});
+    ans.style.display = 'flex';
+    ans.style.flexDirection = 'column';
     ans.style.height = '100%';
+    ans.style.width = '100%';
     if (typeof this.props.class !== 'undefined') {
       ans.class = this.props.class;
     }
@@ -93,6 +97,7 @@ export default class DragList extends React.Component {
     this.transitionDuration = this.props.animationDuration;
     this.downNo = 0;
     this.initalElem = null;
+    this.blankHeightTmp = -1;
   }
   initializeBindings() {
     this.setHeight = this.setHeight.bind(this);
@@ -117,6 +122,7 @@ export default class DragList extends React.Component {
     this.maxOutTransitionDuration = this.maxOutTransitionDuration.bind(this);
     this.handleStartEvents = this.handleStartEvents.bind(this);
     this.calculateBlankHeight = this.calculateBlankHeight.bind(this);
+    this.fixBlankHeight = this.fixBlankHeight.bind(this);
     this.calculateBlankH = this.calculateBlankH.bind(this);
     this.handleStartContinue = this.handleStartContinue.bind(this);
     this.handleStart = this.handleStart.bind(this);
@@ -162,6 +168,7 @@ export default class DragList extends React.Component {
         this.blank = null;
         this.blocker = -1;
         this.blankH = -1;
+        this.blankHeightTmp = -1;
         this.setState({});
       }
     }
@@ -295,7 +302,6 @@ export default class DragList extends React.Component {
     if (dragData.target !== item) {
       dragData.target = item;
       if (dragData.target !== null) {
-        //console.log('enterMeh');
         dragData.target.dispatchEvent(new Event('enterMeh', { bubbles: true }));
       }
     }
@@ -312,7 +318,6 @@ export default class DragList extends React.Component {
   }
   moveFlyingBodyHax(e) {
     if (dragData.item !== null) {
-      //console.log(e);
       dragData.ePos = (dragData.isTouchOrMouse ? { x: e.touches.item(0).clientX, y: e.touches.item(0).clientY } : { x: e.clientX, y: e.clientY });
       e.preventDefault();
       e.stopPropagation();
@@ -362,33 +367,63 @@ export default class DragList extends React.Component {
     if (prevId === this.draggedId) {
       --prevId;
     }
-    let ans = -Math.max((prevId < 0 ? 0 : this.itemMarginBottoms[prevId]), dragData.mySpecs.marginTop);
+    //let ans = -Math.max((prevId < 0 ? 0 : this.itemMarginBottoms[prevId]), dragData.mySpecs.marginTop);
+    let ans = 0;
+    console.log(ans);
+    console.log('lele');
     for (let i = id; i < this.props.children.length; ++i) {
       if (i !== this.draggedId) {
-        ans -= this.itemHeights[i];
-        let prevI = i - 1;
+        ans -= this.itemHeights[i] + this.itemMarginBottoms[i] + this.itemMarginTops[i];
+        /*let prevI = i - 1;
         if (prevI === this.draggedId) {
           --prevI;
-        }
-        ans -= Math.max((prevI < 0 ? 0 : this.itemMarginBottoms[prevI]), this.itemMarginTops[i]);
+        }*/
+        //ans -= Math.max((prevI < 0 ? 0 : this.itemMarginBottoms[prevI]), this.itemMarginTops[i]);
       }
     }
+    console.log('bebe');
     prevId = id - 1;
     if (prevId === this.draggedId) {
       --prevId;
     }
-    ans += Math.max((prevId < 0 ? 0 : this.itemMarginBottoms[prevId]), dragData.mySpecs.marginTop);
+    console.log(ans);
+    //ans += Math.max((prevId < 0 ? 0 : this.itemMarginBottoms[prevId]), dragData.mySpecs.marginTop);
+    console.log(ans);
     return ans;
+  }
+  fixBlankHeight(di) {
+    if (this.blankHeightTmp === -1) {
+      const stl = window.getComputedStyle(di, null);
+      //console.log('fbh');
+      //console.log(dragData.mySpecs);
+      dragData.mySpecs = {
+        height: parseFloat(stl.height, 10),
+        marginTop: parseFloat(stl.marginTop, 10),
+        marginBottom: parseFloat(stl.marginBottom, 10)
+      };
+      //console.log(dragData.mySpecs);
+      //console.log(this.blankH);
+      //console.log(this.blankHeight);
+      this.blankH = this.calculateBlankH(this.blocker);
+      this.blankHeight = this.calculateBlankHeight((this.blocker - 1 === this.draggedId ? this.blocker - 2 : this.blocker - 1), this.blocker);
+      //console.log(this.blankH);
+      //console.log(this.blankHeight);
+      this.setState({});
+      this.blankHeightTmp = 0;
+    }
   }
   calculateBlankHeight(prevId, nextId) {
     if (typeof this.props.children === 'undefined') {
       return 0;
     }
+    /*
     let ans = dragData.mySpecs.height;
     ans -= Math.max((prevId >= 0 ? this.itemMarginBottoms[prevId] : 0), (nextId < this.props.children.length ? this.itemMarginTops[nextId] : 0));
     ans += Math.max(dragData.mySpecs.marginTop, (prevId >= 0 ? this.itemMarginBottoms[prevId] : 0));
     ans += Math.max(dragData.mySpecs.marginBottom, (nextId < this.props.children.length ? this.itemMarginTops[nextId] : 0));
     return ans;
+    */
+    return dragData.mySpecs.height + dragData.mySpecs.marginTop + dragData.mySpecs.marginBottom;
   }
   handleStartContinue(id, stl, downNo, elemDimensions) {
     if (downNo === this.downNo) {
@@ -409,11 +444,12 @@ export default class DragList extends React.Component {
       this.handleStartEvents();
       if (this.props.dragName === this.props.dropName) {
         this.blank = (typeof this.props.dropFunc === 'undefined' ? dragData.item : this.props.dropFunc(this.props.myGid, dragData.item));
-        this.blocker = id + (this.props.clone === true ? 0 : 1);
+        this.blocker = id + (this.clone === true ? 0 : 1);
         this.blankHeight = this.calculateBlankHeight(id - 1, this.blocker);
-        this.draggedId = (this.props.clone === true ? -1 : id);
+        this.blankHeightTmp = 0;
+        this.draggedId = (this.clone === true ? -1 : id);
         this.blankH = this.calculateBlankH(this.blocker);
-        if (this.props.clone === false) {
+        if (this.clone === false) {
           this.transitionDuration = 0;
           setTimeout(this.maxOutTransitionDuration, 4);
         } else {
@@ -468,6 +504,7 @@ export default class DragList extends React.Component {
       this.blank = null;
       this.blocker = -1;
       this.blankH = -1;
+      this.blankHeightTmp = -1;
       this.transitionDuration = 0;
       dragData.dropCallback();
       if (typeof this.props.insertItem !== 'undefined') {
@@ -493,6 +530,7 @@ export default class DragList extends React.Component {
   }
   render() {
     return React.createElement('div', this.getListProps(),
+        this.props.topElem !== null && this.props.topElem,
         typeof this.props.children !== 'undefined' && this.props.children.map((item, i) => (typeof item !== 'undefined') &&
         (<DragItem
           setHeight={this.setHeight}
@@ -511,13 +549,15 @@ export default class DragList extends React.Component {
         ),
         this.blank !== null && <BlankItem
           trans={this.blankH}
+          fixH={this.fixBlankHeight}
         >{this.blank}</BlankItem>,
         this.state.flying !== null && <FlyingItem
           left={this.state.currX}
           top={this.state.currY}
           elemDimensions={dragData.itemDimensions}
           rotate={this.props.rotateFlying}
-        >{this.state.flying}</FlyingItem>
+        >{this.state.flying}</FlyingItem>,
+      this.props.bottomElem !== null && this.props.bottomElem
       );
   }
 }
@@ -532,6 +572,8 @@ DragList.PropTypes = {
   style: PropTypes.shape(),
   animationDuration: PropTypes.func,
   class: PropTypes.string,
+  topElem: PropTypes.element,
+  bottomElem: PropTypes.element,
   scrollWhen: PropTypes.number,
   scrollSpeed: PropTypes.number,
   delayOnTouch: PropTypes.number,

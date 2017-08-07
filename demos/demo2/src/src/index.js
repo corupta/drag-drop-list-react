@@ -18,29 +18,41 @@ export default class DragDrop extends React.Component {
     super(props);
   }
   componentWillReceiveProps(nextProps) {
-    if (typeof nextProps.upperElem !== 'undefined') {
-      this.upperElem = <div style={{ width: '100%', display: 'table' }}>{nextProps.upperElem}<hr /></div>;
-    } else if (typeof this.upperElem === 'undefined') {
-      this.upperElem = null;
+    const topElemSticks = typeof nextProps.topElemSticks === 'undefined' ? true : nextProps.topElemSticks;
+    const bottomElemSticks = typeof nextProps.bottomElemSticks === 'undefined' ? true : nextProps.bottomElemSticks;
+    this.topElem = null;
+    this.innerTopElem = null;
+    if (typeof nextProps.topElem !== 'undefined' ) {
+      const topElem = <div style={{ width: '100%', marginBottom: 'auto' }}>{nextProps.topElem}<hr /></div>;
+      if (topElemSticks) {
+        this.topElem = topElem;
+      } else {
+        this.innerTopElem = topElem;
+      }
     }
+    this.bottomElem = null;
+    this.innerBottomElem = null;
     if (typeof nextProps.bottomElem !== 'undefined') {
-      this.bottomElem = <div style={{ width: '100%', display: 'table' }}><hr />{nextProps.bottomElem}</div>;
-    } else if (typeof this.bottomElem === 'undefined') {
-      this.bottomElem = null;
+      const bottomElem = <div style={{width: '100%', marginTop: 'auto' }}><hr/>{nextProps.bottomElem}</div>;
+      if (bottomElemSticks) {
+        this.bottomElem = bottomElem
+      } else {
+        this.innerBottomElem = bottomElem;
+      }
     }
     this.style = {};
-    if (typeof this.props.style !== 'undefined') {
-      if (typeof this.props.style.overflow !== 'undefined') {
-        this.style.overflow = this.props.style.overflow;
+    if (typeof nextProps.style !== 'undefined') {
+      if (typeof nextProps.style.overflow !== 'undefined') {
+        this.style.overflow = nextProps.style.overflow;
       }
-      if (typeof this.props.style.overflowX !== 'undefined') {
-        this.style.overflowX = this.props.style.overflowX;
+      if (typeof nextProps.style.overflowX !== 'undefined') {
+        this.style.overflowX = nextProps.style.overflowX;
       }
-      if (typeof this.props.style.overflowY !== 'undefined') {
-        this.style.overflowY = this.props.style.overflowY;
+      if (typeof nextProps.style.overflowY !== 'undefined') {
+        this.style.overflowY = nextProps.style.overflowY;
       }
     }
-    this.myStyle = (typeof this.props.style !== 'undefined' ? { ...this.props.style } : {});
+    this.myStyle = (typeof nextProps.style !== 'undefined' ? { ...nextProps.style } : {});
     this.myStyle.overflow = 'hidden';
     this.myStyle.overflowX = 'hidden';
     this.myStyle.overflowY = 'hidden';
@@ -48,8 +60,8 @@ export default class DragDrop extends React.Component {
   render() {
     const tag = (typeof this.props.tag === 'undefined' ? 'div' : this.props.tag);
     return React.createElement(tag, { style: this.myStyle },
-      React.createElement('div', { style: { display: 'flex', height: '100%', width: '100%', justifyContent: 'space-between', flexDirection: 'column'} },
-        typeof this.upperElem !== 'undefined' && this.upperElem,
+      React.createElement('div', { style: { display: 'flex', alignItems: 'center', height: '100%', width: '100%', flexDirection: 'column'} },
+        this.topElem !== null && this.topElem,
         (
         <DragList
           myGid={this.props.myGid}
@@ -61,6 +73,8 @@ export default class DragDrop extends React.Component {
           style={this.style}
           animationDuration={this.props.animationDuration}
           class={this.props.class}
+          topElem={this.innerTopElem}
+          bottomElem={this.innerBottomElem}
           scrollWhen={this.props.scrollWhen}
           scrollSpeed={this.props.scrollSpeed}
           delayOnTouch={this.props.delayOnTouch}
@@ -70,7 +84,7 @@ export default class DragDrop extends React.Component {
           {this.props.children}
         </DragList>
         ),
-        typeof this.bottomElem !== 'undefined' && this.bottomElem
+        this.bottomElem !== null && this.bottomElem
       )
     );
   }
@@ -86,8 +100,10 @@ DragList.PropTypes = {
   style: PropTypes.shape(),
   animationDuration: PropTypes.func,
   class: PropTypes.string,
-  upperElem: PropTypes.element,
+  topElem: PropTypes.element,
   bottomElem: PropTypes.element,
+  topElemSticks: PropTypes.bool,
+  bottomElemSticks: PropTypes.bool,
   scrollWhen: PropTypes.number,
   scrollSpeed: PropTypes.number,
   delayOnTouch: PropTypes.number,
@@ -96,7 +112,6 @@ DragList.PropTypes = {
 };
 
 DragList.defaultProps = {
-  clone: false,
   dragName: '',
   dropName: '',
   animationDuration: 250,
