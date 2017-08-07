@@ -43,6 +43,7 @@ export default class DragItem extends React.Component {
     }
     ans.transitionDuration = `${this.props.trans.dur}ms`;
     ans.userSelect = 'none';
+    ans.zIndex = 1;
     if (this.props.destroyer) {
       ans.display = 'none';
       ans.touchAction = 'none';
