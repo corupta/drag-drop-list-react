@@ -59,9 +59,9 @@ What's more, you can use `import DragList, { getKey() } from 'DragList'` to also
 |:-------------------:|:------------------------------------:|:------------------------------------------:|:-----------:|
 |      **myGid**      |              ***Undefined***               |                   Number                   | Required  |
 |    **dragName**     |              *Undefined*               |                   String                   | Optional  |
-|    **dropName**     |              ```Undefined```               |                   String                   | Optional  |
+|    **dropName**     |              `Undefined`               |                   String                   | Optional  |
 |   **removeItem**    |              ``Undefined``               |           function(myGid, myId)            | Optional  |
-|   **insertItem**    |              `Undefined`               |function(dropFunc(myGid, item), myGid, myId)| Optional  |
+|   **insertItem**    |              ```Undefined```               |function(dropFunc(myGid, item), myGid, myId)| Optional  |
 |    **dropFunc**     |function(myGid, item) <br />{ return item; }|           function(myGid, item)            | Optional  |
 |      **style**      |              Undefined               |      React Style Object (camelCased)       | Optional  |
 |**animationDuration**|                 250                  |                   Number                   | Optional  |
