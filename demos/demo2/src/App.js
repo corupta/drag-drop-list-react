@@ -1,5 +1,5 @@
 import React from 'react';
-import DragDrop, { getKey } from './src/index';//'drag-drop-list-react';
+import DragDrop, { getKey } from 'drag-drop-list-react';
 
 import Item from './Item';
 

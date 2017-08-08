@@ -55,6 +55,34 @@ What's more, you can use `import DragList, { getKey() } from 'DragList'` to also
 
 ## Options (Props)
 
+| PropName | Default Value |  Type  | Is Required |
+|:--------:|:-------------:|:------:|:-----------:|
+|  myGid   |   Undefined   | Number |   Required  |
+
+
+```
+props = {
+  myGid: (undefined) - required - number
+  dragName: (undefined) - string
+  dropName: (undefined) - string
+  removeItem: (undefined) - function(myGid, myId)
+  insertItem: (undefined) - function(dropFunc(myGid, item), myGid, myId)
+  style: (undefined) - react style object (camelCased)
+  animationDuration: (250) - number
+  class: (undefined) - string
+  topElem: (undefined) - html / jsx object
+  bottomElem: (undefined) - html / jsx object
+  topElemSticks: (true) - bool
+  bottomElemSticks: (true) - bool
+  scrollWhen: (48) - number
+  scrollSpeed: (1.00) - number/float
+  delayOnTouch: (400) - number
+  delayOnMouse: (0) - number
+  rotateFlying: (true) - bool
+}
+```
+
+
 ### `myGid` option:
 
 Give a unique id(number) to a list. This field is required. 
