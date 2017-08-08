@@ -76,7 +76,7 @@ What's more, you can use `import DragList, { getKey() } from 'DragList'` to also
 |  **delayOnMouse**   |                     `0`                      |                   Number                   |*Optional* |
 |  **rotateFlying**   |                    `True`                    |                    Bool                    |*Optional* |
 
-
+<!---
 ```
 props = {
   myGid: (undefined) - required - number
@@ -99,6 +99,7 @@ props = {
   rotateFlying: (true) - bool
 }
 ```
+--->
 
 
 ### `myGid` option:
