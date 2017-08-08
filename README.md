@@ -55,9 +55,26 @@ What's more, you can use `import DragList, { getKey() } from 'DragList'` to also
 
 ## Options (Props)
 
-| PropName | Default Value |  Type  | Is Required |
-|:--------:|:-------------:|:------:|:-----------:|
-|  myGid   |   Undefined   | Number |   Required  |
+|      PropName       |            Default Value             |                    Type                    |Is Required|
+|:-------------------:|:------------------------------------:|:------------------------------------------:|:-----------:|
+|      **myGid**      |              Undefined               |                   Number                   | Required  |
+|    **dragName**     |              Undefined               |                   String                   | Optional  |
+|    **dropName**     |              Undefined               |                   String                   | Optional  |
+|   **removeItem**    |              Undefined               |           function(myGid, myId)            | Optional  |
+|   **insertItem**    |              Undefined               |function(dropFunc(myGid, item), myGid, myId)| Optional  |
+|    **dropFunc**     |function(myGid, item) { return item; }|           function(myGid, item)            | Optional  |
+|      **style**      |              Undefined               |      React Style Object (camelCased)       | Optional  |
+|**animationDuration**|                 250                  |                   Number                   | Optional  |
+|      **class**      |              Undefined               |                   String                   | Optional  |
+|     **topElem**     |              Undefined               |             HTML / JSX Object              | Optional  |
+|    **bottomElem**   |              Undefined               |             HTML / JSX Object              | Optional  |
+|  **topElemSticks**  |                 True                 |                    Bool                    | Optional  |
+|**bottomElemSticks** |                 True                 |                    Bool                    | Optional  |
+|   **scrollWhen**    |                  48                  |                   Number                   | Optional  |
+|   **scrollSpeed**   |                 1.00                 |              Number / Float                | Optional  |
+|   **delayOnTouch**  |                 400                  |                   Number                   | Optional  |
+|  **delayOnMouse**   |                  0                   |                   Number                   | Optional  |
+|  **rotateFlying**   |                 True                 |                    Bool                    | Optional  |
 
 
 ```
@@ -67,6 +84,7 @@ props = {
   dropName: (undefined) - string
   removeItem: (undefined) - function(myGid, myId)
   insertItem: (undefined) - function(dropFunc(myGid, item), myGid, myId)
+  dropFunc: (function(myGid, item){ return item; } ), - function(myGid, item)
   style: (undefined) - react style object (camelCased)
   animationDuration: (250) - number
   class: (undefined) - string
