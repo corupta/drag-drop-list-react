@@ -272,7 +272,7 @@ export default class App extends React.Component {
   removeItem(myGid, myId) {
     const _allitems = [...this.state.items];
     const _items = [..._allitems[myGid]];
-    for (let i = myId; i < _items.length + 1; ++i) {
+    for (let i = myId; i < _items.length - 1; ++i) {
       _items[i] = _items[i + 1];
     }
     _items.pop();

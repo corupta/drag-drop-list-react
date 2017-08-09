@@ -457,6 +457,9 @@ export default class DragList extends React.Component {
         } else {
           this.maxOutTransitionDuration();
         }
+      } else if(this.clone === false) {
+        this.draggedId = id;
+        this.maxOutTransitionDuration();
       }
       this.setState({
         flying: this.props.children[id],
