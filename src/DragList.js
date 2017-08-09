@@ -459,10 +459,11 @@ export default class DragList extends React.Component {
         }
       } else if(this.clone === false) {
         this.draggedId = id;
+        this.blocker = id;
         this.transitionDuration = 0;
         this.blankHeight = this.calculateBlankHeight(id - 1, id + 1);
         this.setState({},
-          setTimeout(4, function() { this.maxOutTransitionDuration(); this.blankHeight = 0; this.setState(); })
+          () => { setTimeout( () => { this.maxOutTransitionDuration(); this.blankHeight = 0; this.blocker = -1; this.setState({}); }, 4); }
         );
       }
       this.setState({
@@ -540,10 +541,10 @@ export default class DragList extends React.Component {
   render() {
     return React.createElement('div', this.getListProps(),
         this.props.topElem !== null && this.props.topElem,
-        typeof this.props.children !== 'undefined' && this.props.children.map((item, i) => (typeof item !== 'undefined') &&
+        typeof this.props.children !== 'undefined' && this.props.children.map((item, i) => (typeof item !== 'undefined') && console.log(i + '==' + this.draggedId) ||
         (<DragItem
           setHeight={this.setHeight}
-          trans={{ H: (i >= this.blocker && this.blank !== null ? this.blankHeight : 0), dur: this.transitionDuration }}
+          trans={{ H: ( this.blocker !== -1 && i >= this.blocker ? this.blankHeight : 0), dur: this.transitionDuration }}
           key={i}
           setRelatives={(stl) => { dragData.relativeX = stl.left; dragData.relativeY = stl.top; }}
           onSthDown={this.handleStart}

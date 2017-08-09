@@ -45,10 +45,10 @@ const listDetailsTop = [
     </div>),
   (<div>
       <h2> List 3 </h2>
-      <ul className='shrinkLittle'>
+      <ul>
         <li> Not clonable <br />(there is a remove function) </li>
         <li> Not scrollable <br />(dragName !== dropName) </li>
-        <li> Not Draggable, but Droppable </li>
+        <li> Draggable, Not Droppable </li>
         <li> Items in this list can be dropped to lists 1, 2, 4, 5 </li>
       </ul>
     </div>),
