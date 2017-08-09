@@ -4,22 +4,18 @@ import DragDrop, { getKey } from 'drag-drop-list-react';
 import Item from './Item';
 
 const imgStyle = {
-  height: 100,
-  width: 100,
+  height: 72,
+  width: 58,
+  padding: 12,
 };
 
 const itemImgStyle = {
   ...imgStyle,
+  padding: 0,
   float: 'left',
-  margin: '0 8px 8px'
+  margin: '0 6px 8px 4px'
 };
 
-const bodyStyle = {
-  width: '100%',
-  height: '100%',
-  background: '#f0fff5',
-  position: 'absolute'
-};
 
 const mainStyle = {
   width: 800,
@@ -65,8 +61,7 @@ const listStyle3 = {
 
 const itemStyle1 = {
   width: 200,
-  margin: '10%',
-  marginBottom: 40,
+  margin: '16px auto',
   border: '1px solid black',
   background: '#ccddee',
   color: '#886644'
@@ -74,8 +69,8 @@ const itemStyle1 = {
 
 const itemStyle2 = {
   width: 200,
-  margin: 20,
-  marginBottom: 40,
+  margin: '10px auto',
+  marginBottom: 10,
   border: '2px groove red',
   background: '#eeddcc',
   color: '#446688'
@@ -94,6 +89,67 @@ const trash = (
     <h2>Trash</h2>
   </div>
 );
+
+const itemSet1 = [
+  {
+    title: 'T-Shirt',
+    desc: 'Very Cheap.',
+    url: 'https://image.spreadshirtmedia.com/image-server/v1/products/1003716746/views/1,width=800,height=800,appearanceId=1,backgroundColor=fff,version=1485256808/i-eat-ass-t-shirt-men-s-t-shirt.jpg',
+    price: 12.3
+  },
+  {
+    title: 'Pants',
+    desc: 'Something to wear.',
+    url: 'https://d39dp5zikyykwb.cloudfront.net/public/api/cloudfront/image/224872/400/1/80/FFF/0/20161209133713261_fv_pimcore_1913556_flat.jpg',
+    price: 40.95
+  },
+  {
+    title: 'Jacket',
+    desc: 'Super thick.',
+    url: 'https://s-media-cache-ak0.pinimg.com/736x/e3/b1/18/e3b11838b3f8745c39e289c12b1356cb--motorcycle-jackets-for-men-mens-motorcycle-jacket.jpg',
+    price: 259.99
+  },
+  {
+    title: 'Gloves',
+    desc: 'Something that can keep you hot.',
+    url: 'https://cdn.shopify.com/s/files/1/0113/9052/products/9.jpeg',
+    price: 20.75
+  },
+  {
+    title: 'Shoes',
+    desc: 'Great looking.',
+    url: 'https://i.ebayimg.com/00/s/MjM2WDMxNQ==/z/cG4AAOSwnQhXoNRO/$_57.JPG',
+    price: 126.44
+  }
+];
+
+const itemSet2 = [
+  {
+    title: 'Sunglasses',
+    desc: 'Protects you from the sun.',
+    url: 'http://scene7.zumiez.com/is/image/zumiez/pdp_hero/Happy-Hour-G2-Black-%26-Gold-Sunglasses-_261892-front.jpg',
+    price: 105.48
+  },
+  {
+    title: 'Watch',
+    desc: 'Cool, and shows you time.',
+    url: 'http://www.thinkgeek.com/images/products/zoom/imnl_tesla_watch.jpg',
+    price: 68.9
+  },
+  {
+    title: 'Necklace',
+    desc: 'Very shiny.',
+    url: 'https://cdn.notonthehighstreet.com/fs/64/92/b87a-d57b-42ba-817f-87e4cdce1c30/original_personalised-initial-birthstone-necklace.jpg',
+    price: 31.5
+  },
+  {
+    title: 'Skull Ring',
+    desc: 'For those who love to hardcore rock.',
+    url: 'https://www.thegreatfroglondon.com/wp-content/uploads/top-jaw-skull-ring-angled-600x600.jpg',
+    price: 45
+  }
+];
+
 
 export default class App extends React.Component {
   constructor(props){
@@ -144,43 +200,29 @@ export default class App extends React.Component {
     });
   }
   createSomeItems() {
-    const titles = ['', 'T-Shirt', 'Pants', 'Jacket', 'Gloves', 'Shoes'];
-    const descs = ['', 'Something to wear.', 'Something that can keep you hot.', 'Super thick.', 'Very cheap.', 'Great looking.'];
-    const prices = [1.6, 10.3, 50.4, 100.7, 500.1, 999.9, 300.8];
-    const urls = [
-      '',
-      'https://image.spreadshirtmedia.com/image-server/v1/products/1003716746/views/1,width=800,height=800,appearanceId=1,backgroundColor=fff,version=1485256808/i-eat-ass-t-shirt-men-s-t-shirt.jpg',
-      'https://d39dp5zikyykwb.cloudfront.net/public/api/cloudfront/image/224872/400/1/80/FFF/0/20161209133713261_fv_pimcore_1913556_flat.jpg',
-      'https://s-media-cache-ak0.pinimg.com/736x/e3/b1/18/e3b11838b3f8745c39e289c12b1356cb--motorcycle-jackets-for-men-mens-motorcycle-jacket.jpg',
-      'https://cdn.shopify.com/s/files/1/0113/9052/products/9.jpeg',
-      'https://i.ebayimg.com/00/s/MjM2WDMxNQ==/z/cG4AAOSwnQhXoNRO/$_57.JPG'
-    ];
     const _items = [[],[],[],[]];
-    const maxn = 12;
-    for (let i = 0; i < maxn; ++i) {
-      _items[0][i] = (
-        <Item
-          title={titles[Math.round(Math.random() * 5)]}
-          desc={descs[Math.round(Math.random() * 5)]}
-          price={prices[Math.round(Math.random() * 6)]}
-          img={urls[Math.round(Math.random() * 5)]}
-          style={Math.random() < 0.5 ? itemStyle1 : itemStyle2}
-          imgStyle={itemImgStyle}
-          key={getKey()}
-        />
-      );
-      _items[2][i] = (
-        <Item
-          title={titles[Math.round(Math.random() * 5)]}
-          desc={descs[Math.round(Math.random() * 5)]}
-          price={prices[Math.round(Math.random() * 6)]}
-          img={urls[Math.round(Math.random() * 5)]}
-          style={Math.random() < 0.5 ? itemStyle1 : itemStyle2}
-          imgStyle={itemImgStyle}
-          key={getKey()}
-        />
-      );
-    }
+    itemSet1.map((item, i) => _items[0][i] = (
+      <Item
+        imgStyle={itemImgStyle}
+        title={item.title}
+        desc={item.desc}
+        img={item.url}
+        price={item.price}
+        style={Math.random() > 0.5 ? itemStyle1 : itemStyle2}
+        key={getKey()}
+      />
+    ));
+    itemSet2.map((item, i) => _items[2][i] = (
+      <Item
+        imgStyle={itemImgStyle}
+        title={item.title}
+        desc={item.desc}
+        img={item.url}
+        price={item.price}
+        style={Math.random() > 0.5 ? itemStyle1 : itemStyle2}
+        key={getKey()}
+      />
+    ));
     this.setState({
      items: _items
     });
@@ -193,33 +235,31 @@ export default class App extends React.Component {
     this.state.items[3].map((item) => tot2 += item.props.price);
     const tot2elem = <h2>$ {tot2.toFixed(2)}</h2>
     return (
-      <div style={bodyStyle}>
-        <div style={mainStyle}>
-          <div>
-            <DragDrop myGid={0} dragName='a' dropFunc={this.onDrop} insertItem={this.insertItem}
-                      style={listStyle1} topElem={<h2>Items For Sale!</h2>}>
-              {this.state.items[0]}
-            </DragDrop>
-            <DragDrop myGid={1} dragName='a' dropName='a' dropFunc={this.onDrop} insertItem={this.insertItem} removeItem={this.removeItem}
-                      style={listStyle2} bottomElem={tot1elem} topElem={myCart} bottomElemSticks={false} topElemSticks={false}>
-              {this.state.items[1]}
-            </DragDrop>
-            <DragDrop myGid={-1} dropName='a' dropFunc={this.onDrop} style={listStyle3} topElem={trash}/>
-          </div>
-          <br />
-          <hr />
-          <br />
-          <div>
-            <DragDrop myGid={2} clone={true} dragName='b' dropFunc={this.onDrop} insertItem={this.insertItem}
-                      style={listStyle1} topElem={<h2>Items For Sale!</h2>}>
-              {this.state.items[2]}
-            </DragDrop>
-            <DragDrop myGid={3} dragName='b' dropName='b' dropFunc={this.onDrop} insertItem={this.insertItem} removeItem={this.removeItem}
-                      style={listStyle2} bottomElem={tot2elem} topElem={myCart} rotateFlying={false}>
-              {this.state.items[3]}
-            </DragDrop>
-            <DragDrop myGid={-2} dropName='b' dropFunc={this.onDrop} style={listStyle3} topElem={trash}/>
-          </div>
+      <div style={mainStyle}>
+        <div>
+          <DragDrop myGid={0} dragName='a' dropFunc={this.onDrop} insertItem={this.insertItem}
+                    style={listStyle1} topElem={<h2>Items For Sale!</h2>}>
+            {this.state.items[0]}
+          </DragDrop>
+          <DragDrop myGid={1} dragName='a' dropName='a' dropFunc={this.onDrop} insertItem={this.insertItem} removeItem={this.removeItem}
+                    style={listStyle2} bottomElem={tot1elem} topElem={myCart}>
+            {this.state.items[1]}
+          </DragDrop>
+          <DragDrop myGid={-1} dropName='a' dropFunc={this.onDrop} style={listStyle3} topElem={trash}/>
+        </div>
+        <br />
+        <hr />
+        <br />
+        <div>
+          <DragDrop myGid={2} clone={true} dragName='b' dropFunc={this.onDrop} insertItem={this.insertItem}
+                    style={listStyle1} topElem={<h2>Items For Sale!</h2>}>
+            {this.state.items[2]}
+          </DragDrop>
+          <DragDrop myGid={3} dragName='b' dropName='b' dropFunc={this.onDrop} insertItem={this.insertItem} removeItem={this.removeItem}
+                    style={listStyle2} bottomElem={tot2elem} topElem={myCart} rotateFlying={false}>
+            {this.state.items[3]}
+          </DragDrop>
+          <DragDrop myGid={-2} dropName='b' dropFunc={this.onDrop} style={listStyle3} topElem={trash}/>
         </div>
       </div>
     );

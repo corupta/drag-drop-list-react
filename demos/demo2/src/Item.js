@@ -6,11 +6,11 @@ export default class Item extends React.Component {
     return (
       <div style={this.props.style !== 'undefined' ? this.props.style : {}}>
         {typeof this.props.title !== 'undefined' && this.props.title !== '' && <h3>{this.props.title}</h3>}
-        {React.createElement('p', {},
+        {React.createElement('p', {}  ,
           typeof this.props.img !== 'undefined' && this.props.img !== '' &&
             <img alt='some item' src={this.props.img} style={typeof this.props.imgStyle !== 'undefined' ? this.props.imgStyle : {}} />,
-          typeof this.props.desc !== 'undefined' && this.props.desc !== '' && this.props.desc)}
-        {<h4>$ {this.props.price}</h4>}
+          typeof this.props.desc !== 'undefined' && this.props.desc !== '' && <span>{this.props.desc}</span>)}
+        {<b>$ {this.props.price}</b>}
       </div>
     );
   }

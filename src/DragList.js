@@ -81,7 +81,7 @@ export default class DragList extends React.Component {
     return ans;
   }
   setHeight(id, stl) {
-    this.itemHeights[id] = parseFloat(stl.height, 10) + parseFloat(stl.borderBottom, 10) + parseFloat(stl.borderTop, 10);
+    this.itemHeights[id] = parseFloat(stl.height, 10) + parseFloat(stl.borderBottom, 10) + parseFloat(stl.borderTop, 10) + parseFloat(stl.paddingTop, 10) + parseFloat(stl.paddingBottom, 10);
     this.itemMarginTops[id] = parseFloat(stl.marginTop, 10);
     this.itemMarginBottoms[id] = parseFloat(stl.marginBottom, 10);
   }
@@ -369,8 +369,7 @@ export default class DragList extends React.Component {
     }
     //let ans = -Math.max((prevId < 0 ? 0 : this.itemMarginBottoms[prevId]), dragData.mySpecs.marginTop);
     let ans = 0;
-    console.log(ans);
-    console.log('lele');
+    //console.log('lele');
     for (let i = id; i < this.props.children.length; ++i) {
       if (i !== this.draggedId) {
         ans -= this.itemHeights[i] + this.itemMarginBottoms[i] + this.itemMarginTops[i];
@@ -379,16 +378,19 @@ export default class DragList extends React.Component {
           --prevI;
         }*/
         //ans -= Math.max((prevI < 0 ? 0 : this.itemMarginBottoms[prevI]), this.itemMarginTops[i]);
+        //console.log(i);
+        //console.log(this.itemHeights[i]);
+        //console.log(this.itemMarginBottoms[i]);
+        //console.log(this.itemMarginTops[i]);
       }
     }
-    console.log('bebe');
+    //console.log('bebe');
     prevId = id - 1;
     if (prevId === this.draggedId) {
       --prevId;
     }
-    console.log(ans);
+    //console.log(ans);
     //ans += Math.max((prevId < 0 ? 0 : this.itemMarginBottoms[prevId]), dragData.mySpecs.marginTop);
-    console.log(ans);
     return ans;
   }
   fixBlankHeight(di) {
@@ -397,7 +399,7 @@ export default class DragList extends React.Component {
       //console.log('fbh');
       //console.log(dragData.mySpecs);
       dragData.mySpecs = {
-        height: parseFloat(stl.height, 10),
+        height: parseFloat(stl.height, 10) + parseFloat(stl.borderTop, 10) + parseFloat(stl.borderBottom, 10) + parseFloat(stl.paddingTop, 10) + parseFloat(stl.paddingBottom, 10),
         marginTop: parseFloat(stl.marginTop, 10),
         marginBottom: parseFloat(stl.marginBottom, 10)
       };
