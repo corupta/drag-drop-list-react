@@ -218,7 +218,7 @@ export default class DragList extends React.Component {
   }
   removeFlyingDoubleHax() {
     ++this.downNo;
-    dragData.initalElem.removeEventListener('overMeh', this.handleOverInitial);
+    this.initalElem.removeEventListener('overMeh', this.handleOverInitial);
     window.removeEventListener('overMeh', this.removeFlyingDoubleHax);
     if (window.PointerEvent) {
       window.removeEventListener('pointermove', this.moveFlyingBodyDoubleHax);
