@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class BuildImage extends React.Component {
-  render () {
-    return <h1>Image</h1>;
+
+export default class BuildBreak extends React.Component {
+  render() {
+    return <h1>Break</h1>;
   }
 }
 
-BuildImage.PropTypes = {
-  url: PropTypes.string.isRequired,
+BuildBreak.PropTypes = {
   editMode: PropTypes.bool.isRequired,
   upContent: PropTypes.func.isRequired,
   myId: PropTypes.number.isRequired,

@@ -2,8 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const inputStyle = {
+  background: 'none',
+  border: 0,
+  padding: 0,
+  fontSize: '1.6em',
+  fontWeight: 500,
+  margin: 16,
   display: 'block',
-  zIndex: 50
+  textAlign: 'center',
+  width: 'calc(100% - 32px)'
 };
 
 export default class Header extends React.Component {
@@ -28,5 +35,6 @@ Header.PropTypes = {
   content: PropTypes.string.isRequired,
   editMode: PropTypes.bool.isRequired,
   upContent: PropTypes.func.isRequired,
-  myId: PropTypes.number.isRequired
+  myId: PropTypes.number.isRequired,
+  type: PropTypes.element.isRequired
 };

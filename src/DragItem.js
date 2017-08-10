@@ -10,11 +10,15 @@ export default class DragItem extends React.Component {
   constructor(props) {
     super(props);
     this.setMe = this.setMe.bind(this);
+    this.unlockBlock = this.unlockBlock.bind(this);
     this.getMyStyle = this.getMyStyle.bind(this);
     this.addEvents = this.addEvents.bind(this);
     this.handleDown = this.handleDown.bind(this);
     this.handleEnter = this.handleEnter.bind(this);
     this.moveFlyingItem = this.moveFlyingItem.bind(this);
+    this.blocked = false;
+    this.blockLocker = 0;
+    this.prevH = 0;
   }
   componentDidMount() {
     this.setMe();
@@ -35,19 +39,33 @@ export default class DragItem extends React.Component {
       this.props.setHeight(this.props.myId, stl);
     }
   }
+  unlockBlock(blockLocker) {
+    //console.log('unlocker: ' + blockLocker + ' === ' + this.blockLocker);
+    if (this.blockLocker === blockLocker) {
+      this.blocked = false;
+    }
+  }
   getMyStyle() {
     const ans = (typeof this.props.children.props.style === 'undefined' ? {} : { ...this.props.children.props.style });
-    if (this.props.trans.H !== 0) {
-      ans.transform = `translate(0, ${this.props.trans.H}px)`;
-      ans.WebkitTransform = `translate(0, ${this.props.trans.H}px)`;
-    }
-    ans.transitionDuration = `${this.props.trans.dur}ms`;
-    ans.userSelect = 'none';
-    ans.zIndex = 1;
     if (this.props.destroyer) {
       ans.display = 'none';
       ans.touchAction = 'none';
       ans.pointerEvents = 'none';
+    } else {
+      if (this.props.trans.H !== 0) {
+        ans.transform = `translate(0, ${this.props.trans.H}px)`;
+        ans.WebkitTransform = `translate(0, ${this.props.trans.H}px)`;
+      }
+      //console.log(this.props.trans.H + ' !== ' + this.prevH);
+      if (this.prevH !== this.props.trans.H) {
+        this.prevH = this.props.trans.H;
+        this.blocked = true;
+        const blockLocker = ++this.blockLocker;
+        setTimeout(this.unlockBlock, this.props.trans.dur, blockLocker);
+      }
+      ans.transitionDuration = `${this.props.trans.dur}ms`;
+      ans.userSelect = 'none';
+      ans.zIndex = 1;
     }
     return ans;
   }
@@ -65,8 +83,6 @@ export default class DragItem extends React.Component {
     const p = e.type === 'touchstart' || (e.type === 'pointerdown' && (e.pointerType === 'pen' || e.pointerType === 'touch'));
     const t = !p && (e.button === 0);
     if (p || t) {
-      e.preventDefault();
-      e.stopPropagation();
       const getRect = this.me.getBoundingClientRect();
       const stl = { left: getRect.left, top: getRect.top };
       let rel;
@@ -84,10 +100,16 @@ export default class DragItem extends React.Component {
     e.stopPropagation();
   }
   moveFlyingItem(e) {
-    this.props.onsupertouchmove(this.me);
+    if (this.blocked === false) {
+      const rect = this.me.getBoundingClientRect();
+      this.props.onsupermove(this.me, this.props.myId, {top: rect.top, bottom: rect.bottom});
+    }
     e.stopPropagation();
   }
   render() {
+    //if (this.blocked) {
+    //  console.log('blocked');
+    //}
     return React.cloneElement(this.props.children, { style: this.getMyStyle() });
   }
 }
@@ -99,7 +121,7 @@ DragItem.PropTypes = {
   setRelatives: PropTypes.func.isRequired,
   onSthDown: PropTypes.func.isRequired,
   onSthEnter: PropTypes.func.isRequired,
-  onsupertouchmove: PropTypes.func.isRequired,
+  onsupermove: PropTypes.func.isRequired,
   myId: PropTypes.number.isRequired,
   myGid: PropTypes.number.isRequired,
   destroyer: PropTypes.bool.isRequired,

@@ -61,6 +61,9 @@ export default class DragList extends React.Component {
       setTimeout(() => { window.scrollTo(0, 1); window.scrollTo(0, 0); }, 4);
     }
   }
+  componentWillMount() {
+    this.componentWillReceiveProps(this.props);
+  }
   componentWillReceiveProps(nextProps) {
     this.itemHeights = [];
     this.itemMarginTops = [];
@@ -287,7 +290,7 @@ export default class DragList extends React.Component {
       setTimeout(this.startScrollInterval, scrollDetails.time);
     }
   }
-  moveFlying(item, listScrollCallback, newListId) {
+  moveFlying(item, listScrollCallback, newListId, newId, offset) {
     if (item === null || dragData.isInList === false || dragData.currList !== newListId) {
       if (dragData.isInList) {
         dragData.target.dispatchEvent(new Event('leaveMeh', { bubbles: true }));
@@ -299,21 +302,33 @@ export default class DragList extends React.Component {
         dragData.isInList = false;
       }
     }
-    if (dragData.target !== item) {
-      dragData.target = item;
-      if (dragData.target !== null) {
-        dragData.target.dispatchEvent(new Event('enterMeh', { bubbles: true }));
+    //if (dragData.target !== item) {
+      if (newId === -1) {
+        dragData.target = item;
+        if (dragData.target !== null) {
+          dragData.target.dispatchEvent(new Event('enterMeh', { bubbles: true }));
+        }
+      } else if (newId < this.blocker) {
+        if ( dragData.ePos.y < offset.top * 3 / 10 + offset.bottom * 7 / 10) {
+          dragData.target = item;
+          dragData.target.dispatchEvent(new Event('enterMeh', { bubbles: true }));
+        }
+      } else if (newId >= this.blocker) {
+        if ( dragData.ePos.y > offset.top * 7 / 10 + offset.bottom * 3 / 10) {
+          dragData.target = item;
+          dragData.target.dispatchEvent(new Event('enterMeh', { bubbles: true }));
+        }
       }
-    }
+    //}
   }
   moveFlyingBody() {
-    this.moveFlying(null, null, -1);
+    this.moveFlying(null, null, -1, -1, {});
   }
-  moveFlyingScrollList(elem) {
-    this.moveFlying(elem, this.maybeScrollList, this.props.myGid);
+  moveFlyingScrollList(elem, myId, offset) {
+    this.moveFlying(elem, this.maybeScrollList, this.props.myGid, myId, offset);
   }
   moveFlyingList(e) {
-    this.moveFlyingScrollList(this.me);
+    this.moveFlyingScrollList(this.me, -1, {});
     e.stopPropagation();
   }
   moveFlyingBodyHax(e) {
@@ -463,7 +478,7 @@ export default class DragList extends React.Component {
         this.transitionDuration = 0;
         this.blankHeight = this.calculateBlankHeight(id - 1, id + 1);
         this.setState({},
-          () => { setTimeout( () => { this.maxOutTransitionDuration(); this.blankHeight = 0; this.blocker = -1; this.setState({}); }, 4); }
+          () => { setTimeout( () => { this.maxOutTransitionDuration(); this.blankHeight = 0; this.blocker = -1; this.setState({}); }, 8); }
         );
       }
       this.setState({
@@ -541,7 +556,7 @@ export default class DragList extends React.Component {
   render() {
     return React.createElement('div', this.getListProps(),
         this.props.topElem !== null && this.props.topElem,
-        typeof this.props.children !== 'undefined' && this.props.children.map((item, i) => (typeof item !== 'undefined') && console.log(i + '==' + this.draggedId) ||
+        typeof this.props.children !== 'undefined' && this.props.children.map((item, i) => (typeof item !== 'undefined') &&
         (<DragItem
           setHeight={this.setHeight}
           trans={{ H: ( this.blocker !== -1 && i >= this.blocker ? this.blankHeight : 0), dur: this.transitionDuration }}
@@ -549,7 +564,7 @@ export default class DragList extends React.Component {
           setRelatives={(stl) => { dragData.relativeX = stl.left; dragData.relativeY = stl.top; }}
           onSthDown={this.handleStart}
           onSthEnter={this.handleEnterItem}
-          onsupertouchmove={this.moveFlyingScrollList}
+          onsupermove={this.moveFlyingScrollList}
           myId={i}
           myGid={this.props.myId}
           destroyer={this.draggedId === i}

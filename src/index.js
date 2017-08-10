@@ -13,9 +13,19 @@ export function getKey() {
   return `xyq_${lastKey++}`;
 }
 
+const hrStyle = {
+  height: 2,
+  borderWidth: 0,
+  color: 'currentColor',
+  backgroundColor: 'currentColor'
+};
+
 export default class DragDrop extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
+  }
+  componentWillMount() {
+    this.componentWillReceiveProps(this.props);
   }
   componentWillReceiveProps(nextProps) {
     const topElemSticks = typeof nextProps.topElemSticks === 'undefined' ? true : nextProps.topElemSticks;
@@ -23,7 +33,7 @@ export default class DragDrop extends React.Component {
     this.topElem = null;
     this.innerTopElem = null;
     if (typeof nextProps.topElem !== 'undefined' ) {
-      const topElem = <div style={{ width: '100%', marginBottom: 'auto' }}>{nextProps.topElem}<hr /></div>;
+      const topElem = <div style={{ width: '100%', marginBottom: 'auto' }}>{nextProps.topElem}<hr style = {hrStyle}/></div>;
       if (topElemSticks) {
         this.topElem = topElem;
       } else {
@@ -33,7 +43,7 @@ export default class DragDrop extends React.Component {
     this.bottomElem = null;
     this.innerBottomElem = null;
     if (typeof nextProps.bottomElem !== 'undefined') {
-      const bottomElem = <div style={{width: '100%', marginTop: 'auto' }}><hr/>{nextProps.bottomElem}</div>;
+      const bottomElem = <div style={{width: '100%', marginTop: 'auto' }}><hr style={hrStyle} />{nextProps.bottomElem}</div>;
       if (bottomElemSticks) {
         this.bottomElem = bottomElem
       } else {
