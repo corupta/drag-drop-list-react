@@ -2,8 +2,12 @@ import React from 'react';
 import DragDrop, { getKey } from 'drag-drop-list-react';
 
 const mainStyle = {
+  padding: 32,
   background: '#aaaaaa',
-  width: 900,
+  width: 940,
+  textAlign: 'center',
+  margin: 'auto',
+  border: '1px solid black'
 };
 
 const listDetails = [

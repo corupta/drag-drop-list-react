@@ -33,7 +33,7 @@ export default class DragDrop extends React.Component {
     this.topElem = null;
     this.innerTopElem = null;
     if (typeof nextProps.topElem !== 'undefined' ) {
-      const topElem = <div style={{ width: '100%', marginBottom: 'auto' }}>{nextProps.topElem}<hr style = {hrStyle}/></div>;
+      const topElem = <div style={{ width: '100%', marginBottom: 'auto' }}>{nextProps.topElem}<hr style={{...hrStyle, marginBottom: 0}}/></div>;
       if (topElemSticks) {
         this.topElem = topElem;
       } else {
@@ -43,7 +43,7 @@ export default class DragDrop extends React.Component {
     this.bottomElem = null;
     this.innerBottomElem = null;
     if (typeof nextProps.bottomElem !== 'undefined') {
-      const bottomElem = <div style={{width: '100%', marginTop: 'auto' }}><hr style={hrStyle} />{nextProps.bottomElem}</div>;
+      const bottomElem = <div style={{width: '100%', marginTop: 'auto' }}><hr style={{...hrStyle, marginTop: 0}} />{nextProps.bottomElem}</div>;
       if (bottomElemSticks) {
         this.bottomElem = bottomElem
       } else {
