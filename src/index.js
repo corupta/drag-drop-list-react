@@ -69,7 +69,7 @@ export default class DragDrop extends React.Component {
   }
   render() {
     const tag = (typeof this.props.tag === 'undefined' ? 'div' : this.props.tag);
-    return React.createElement(tag, { style: this.myStyle },
+    return React.createElement(tag, { style: this.myStyle, className: (this.props.class === 'undefined' ? '' : this.props.class) },
       React.createElement('div', { style: { display: 'flex', alignItems: 'center', height: '100%', width: '100%', flexDirection: 'column'} },
         this.topElem !== null && this.topElem,
         (
@@ -82,7 +82,6 @@ export default class DragDrop extends React.Component {
           dropFunc={this.props.dropFunc}
           style={this.style}
           animationDuration={this.props.animationDuration}
-          class={this.props.class}
           topElem={this.innerTopElem}
           bottomElem={this.innerBottomElem}
           scrollWhen={this.props.scrollWhen}

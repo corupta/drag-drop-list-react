@@ -78,9 +78,6 @@ export default class DragList extends React.Component {
     ans.style.flexDirection = 'column';
     ans.style.height = '100%';
     ans.style.width = '100%';
-    if (typeof this.props.class !== 'undefined') {
-      ans.class = this.props.class;
-    }
     return ans;
   }
   setHeight(id, stl) {
@@ -596,7 +593,6 @@ DragList.PropTypes = {
   dropFunc: PropTypes.func,
   style: PropTypes.shape(),
   animationDuration: PropTypes.func,
-  class: PropTypes.string,
   topElem: PropTypes.element,
   bottomElem: PropTypes.element,
   scrollWhen: PropTypes.number,
