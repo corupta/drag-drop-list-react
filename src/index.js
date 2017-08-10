@@ -82,6 +82,7 @@ export default class DragDrop extends React.Component {
           dropFunc={this.props.dropFunc}
           style={this.style}
           animationDuration={this.props.animationDuration}
+          itemClass={this.props.itemClass}
           topElem={this.innerTopElem}
           bottomElem={this.innerBottomElem}
           scrollWhen={this.props.scrollWhen}
@@ -109,6 +110,7 @@ DragList.PropTypes = {
   style: PropTypes.shape(),
   animationDuration: PropTypes.func,
   class: PropTypes.string,
+  itemClass: PropTypes.string,
   topElem: PropTypes.element,
   bottomElem: PropTypes.element,
   topElemSticks: PropTypes.bool,

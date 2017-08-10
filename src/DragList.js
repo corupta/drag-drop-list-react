@@ -565,6 +565,7 @@ export default class DragList extends React.Component {
           myId={i}
           myGid={this.props.myId}
           destroyer={this.draggedId === i}
+          class={this.props.itemClass}
         >
           {item}
         </DragItem>)
@@ -572,12 +573,14 @@ export default class DragList extends React.Component {
         this.blank !== null && <BlankItem
           trans={this.blankH}
           fixH={this.fixBlankHeight}
+          class={this.props.itemClass}
         >{this.blank}</BlankItem>,
         this.state.flying !== null && <FlyingItem
           left={this.state.currX}
           top={this.state.currY}
           elemDimensions={dragData.itemDimensions}
           rotate={this.props.rotateFlying}
+          class={this.props.itemClass}
         >{this.state.flying}</FlyingItem>,
       this.props.bottomElem !== null && this.props.bottomElem
       );
@@ -593,6 +596,7 @@ DragList.PropTypes = {
   dropFunc: PropTypes.func,
   style: PropTypes.shape(),
   animationDuration: PropTypes.func,
+  itemClass: PropTypes.string,
   topElem: PropTypes.element,
   bottomElem: PropTypes.element,
   scrollWhen: PropTypes.number,

@@ -17,6 +17,7 @@ Check out the awesome, and very easy to use react component for creating a dragd
     - [`style` option:](#style-option)
     - [`animationDuration` option](#animationduration-option)
     - [`class` option:](#class-option)
+    - [`itemClass` option:](#itemclass-option)
     - [`topElem` option:](#topelem-option)
     - [`bottomElem` option:](#bottomelem-option)
     - [`topElemSticks` option:](#topelemsticks-option)
@@ -66,6 +67,7 @@ What's more, you can use `import DragList, { getKey() } from 'DragList'` to also
 |      **style**      |                 `Undefined`                   |      React Style Object (camelCased)       |*Optional* |
 |**animationDuration**|                    `250`                      |                   Number                   |*Optional* |
 |      **class**      |                 `Undefined`                   |                   String                   |*Optional* |
+|      **itemClass**      |                 `Undefined`                   |                   String                   |*Optional* |
 |     **topElem**     |                 `Undefined`                   |             HTML / JSX Object              |*Optional* |
 |    **bottomElem**   |                 `Undefined`                   |             HTML / JSX Object              |*Optional* |
 |  **topElemSticks**  |                    `True`                     |                    Bool                    |*Optional* |
@@ -83,8 +85,8 @@ props = {
   dragName: (undefined) - string
   dropName: (undefined) - string
   removeItem: (undefined) - function(myGid, myId)
-  insertItem: (undefined) - function(dropFunc(myGid, item), myGid, myId)
-  dropFunc: (function(myGid, item){ return item; } ), - function(myGid, item)
+  insertItem: (undefined) - function(dropFunc(item, myGid), myGid, myId)
+  dropFunc: (function(item, myGid){ return item; } ), - function(item, myGid)
   style: (undefined) - react style object (camelCased)
   animationDuration: (250) - number
   class: (undefined) - string
@@ -206,17 +208,17 @@ Don't pass this value if you want to make a list clonable. (Meaning, the items w
 An optional function that is called like `insertItem(item, myGid, myId);` when an item is inserted to a list.
 
 Important Note: if there's an dropFunc function passed to the list that an item is inserted,
-the function is actually called as `insertItem(dropFunc(myGid, item), myGid, myId);`
+the function is actually called as `insertItem(dropFunc(item, myGid), myGid, myId);`
 
 
 ### `dropFunc` option:
 
 An optional function that is called when a dragged item is dragged to a droppable list 
-(whose `dropName` equals the `dragName` of the list from which the item was dragged) and creates a blank item (ghost item) in the list (result of the `dropFunc(myGid, item)`)
+(whose `dropName` equals the `dragName` of the list from which the item was dragged) and creates a blank item (ghost item) in the list (result of the `dropFunc(item, myGid)`)
 
 If there's no `dropFunc` option passed, it acts as if the following dropFunc is implemented.
 ```js
-dropFunc(myGid, item) {
+dropFunc(item, myGid) {
   return item;
 }
 ```
@@ -237,6 +239,11 @@ Default value is 250.
 ### `class` option:
 
 Similar to most `className` props, this option is used to pass class name string to the list. Optional.
+
+
+### `itemClass` option:
+
+Similar to most `className` props, this option is used to pass class name string to the items in the list. Optional.
 
 
 ### `topElem` option:

@@ -33,13 +33,14 @@ export default class BlankItem extends React.Component {
   }
   render() {
     const _style = { ...this.props.children.props.style, ...this.getBlankStyle() };
-    return React.cloneElement(this.props.children, { style: _style });
+    return React.cloneElement(this.props.children, { style: _style, className: (typeof this.props.class === 'undefined' ? '' : this.props.class) });
   }
 }
 
 BlankItem.PropTypes = {
   trans: PropTypes.number.isRequired,
-  fixH: PropTypes.func.isRequired
+  fixH: PropTypes.func.isRequired,
+  class: PropTypes.string
 };
 
 BlankItem.defaultProps = {

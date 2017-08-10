@@ -110,7 +110,7 @@ export default class DragItem extends React.Component {
     //if (this.blocked) {
     //  console.log('blocked');
     //}
-    return React.cloneElement(this.props.children, { style: this.getMyStyle() });
+    return React.cloneElement(this.props.children, { style: this.getMyStyle(), className: (typeof this.props.class === 'undefined' ? '' : this.props.class) });
   }
 }
 
@@ -125,5 +125,6 @@ DragItem.PropTypes = {
   myId: PropTypes.number.isRequired,
   myGid: PropTypes.number.isRequired,
   destroyer: PropTypes.bool.isRequired,
+  class: PropTypes.string
 };
 
