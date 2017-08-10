@@ -169,7 +169,7 @@ export default class App extends React.Component {
   componentDidMount() {
     this.createSomeItems();
   }
-  onDrop(myGid, item) {
+  onDrop(item, myGid) {
     if (myGid === 1 || myGid === 3) {
       return React.cloneElement(item, { style: { ...item.props.style, width: 150 }});
     }
