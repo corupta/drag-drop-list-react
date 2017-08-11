@@ -439,8 +439,8 @@ export default class DragList extends React.Component {
     */
     return dragData.mySpecs.height + dragData.mySpecs.marginTop + dragData.mySpecs.marginBottom;
   }
-  handleStartContinue(id, stl, downNo, elemDimensions) {
-    if (downNo === this.downNo) {
+  handleStartContinue(id, stl, downNo, elemDimensions, getFocusLocker) {
+    if (getFocusLocker() === 0 && downNo === this.downNo) {
       dragData.currList = this.props.myGid;
       dragData.isInList = true;
       dragData.target = this.me;
@@ -489,7 +489,7 @@ export default class DragList extends React.Component {
   handleOverInitial(e) {
     e.stopPropagation();
   }
-  handleStart(id, stl, tOm, e, elem, elemDimensions) {
+  handleStart(id, stl, tOm, e, elem, elemDimensions, getFocusLocker) {
     if (this.props.dragName !== '') {
       this.initalElem = elem;
       const downNo = ++this.downNo;
@@ -507,9 +507,9 @@ export default class DragList extends React.Component {
       }
       this.moveFlyingBodyDoubleHax(e);
       if (tOm) {
-        setTimeout(this.handleStartContinue, this.props.delayOnTouch, id, stl, downNo, elemDimensions);
+        setTimeout(this.handleStartContinue, this.props.delayOnTouch, id, stl, downNo, elemDimensions, getFocusLocker);
       } else {
-        setTimeout(this.handleStartContinue, this.props.delayOnMouse, id, stl, downNo, elemDimensions);
+        setTimeout(this.handleStartContinue, this.props.delayOnMouse, id, stl, downNo, elemDimensions, getFocusLocker);
       }
     }
   }

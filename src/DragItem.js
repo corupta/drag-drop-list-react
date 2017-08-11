@@ -12,6 +12,9 @@ export default class DragItem extends React.Component {
     this.setMe = this.setMe.bind(this);
     this.unlockBlock = this.unlockBlock.bind(this);
     this.getMyStyle = this.getMyStyle.bind(this);
+    this.focusLock = this.focusLock.bind(this);
+    this.focusUnlock = this.focusUnlock.bind(this);
+    this.getFocusLocker = this.getFocusLocker.bind(this);
     this.addEvents = this.addEvents.bind(this);
     this.handleDown = this.handleDown.bind(this);
     this.handleEnter = this.handleEnter.bind(this);
@@ -19,6 +22,7 @@ export default class DragItem extends React.Component {
     this.blocked = false;
     this.blockLocker = 0;
     this.prevH = 0;
+    this.focusLocker = 0;
   }
   componentDidMount() {
     this.setMe();
@@ -40,7 +44,6 @@ export default class DragItem extends React.Component {
     }
   }
   unlockBlock(blockLocker) {
-    //console.log('unlocker: ' + blockLocker + ' === ' + this.blockLocker);
     if (this.blockLocker === blockLocker) {
       this.blocked = false;
     }
@@ -56,7 +59,6 @@ export default class DragItem extends React.Component {
         ans.transform = `translate(0, ${this.props.trans.H}px)`;
         ans.WebkitTransform = `translate(0, ${this.props.trans.H}px)`;
       }
-      //console.log(this.props.trans.H + ' !== ' + this.prevH);
       if (this.prevH !== this.props.trans.H) {
         this.prevH = this.props.trans.H;
         this.blocked = true;
@@ -69,9 +71,20 @@ export default class DragItem extends React.Component {
     }
     return ans;
   }
+  focusLock() {
+    ++this.focusLocker;
+  }
+  focusUnlock() {
+    --this.focusLocker;
+  }
+  getFocusLocker() {
+    return this.focusLocker;
+  }
   addEvents(di) {
     di.addEventListener('supermove', this.moveFlyingItem);
     di.addEventListener('enterMeh', this.handleEnter);
+    di.addEventListener('focusin', this.focusLock);
+    di.addEventListener('focusout', this.focusUnlock);
     if (window.PointerEvent) {
       di.addEventListener('pointerdown', this.handleDown);
     } else {
@@ -80,19 +93,21 @@ export default class DragItem extends React.Component {
     }
   }
   handleDown(e) {
-    const p = e.type === 'touchstart' || (e.type === 'pointerdown' && (e.pointerType === 'pen' || e.pointerType === 'touch'));
-    const t = !p && (e.button === 0);
-    if (p || t) {
-      const getRect = this.me.getBoundingClientRect();
-      const stl = { left: getRect.left, top: getRect.top };
-      let rel;
-      if (p) {
-        rel = { left: stl.left - e.touches.item(0).clientX, top: stl.top - e.touches.item(0).clientY };
-      } else {
-        rel = { left: stl.left - e.clientX, top: stl.top - e.clientY };
+    if (this.focusLocker === 0) {
+      const p = e.type === 'touchstart' || (e.type === 'pointerdown' && (e.pointerType === 'pen' || e.pointerType === 'touch'));
+      const t = !p && (e.button === 0);
+      if (p || t) {
+        const getRect = this.me.getBoundingClientRect();
+        const stl = {left: getRect.left, top: getRect.top};
+        let rel;
+        if (p) {
+          rel = {left: stl.left - e.touches.item(0).clientX, top: stl.top - e.touches.item(0).clientY};
+        } else {
+          rel = {left: stl.left - e.clientX, top: stl.top - e.clientY};
+        }
+        this.props.setRelatives(stl, rel);
+        this.props.onSthDown(this.props.myId, stl, p, e, this.me, {width: this.width, height: this.height}, this.getFocusLocker);
       }
-      this.props.setRelatives(stl, rel);
-      this.props.onSthDown(this.props.myId, stl, p, e, this.me,  { width: this.width, height: this.height });
     }
   }
   handleEnter(e) {
