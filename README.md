@@ -34,6 +34,15 @@ Check out the awesome, and very easy to use react component for creating a dragd
 ## Demos
 
 Check out those demos, to see what that package looks like:
+      
+      /*<li> <a href='demo2' target='_blank'> Demo 2 - Shopping List </a> </li>
+      <li> <a href='demo3' target='_blank'> Demo 3 - Drag & Drop Props </a> </li>
+      <li> <a href='demo4' target='_blank'> Demo 4 - Profile Page </a> </li>
+      <li> <a href='demo5' target='_blank'> Demo 5 - Drag & Drop Props 2 </a> </li>
+      <li> <a href='demo6' target='_blank'> Demo 6 - Drag & Drop & Input </a> </li>
+      <li> <a href='demo7' target='_blank'> Demo 7 - Drag & Drop Other Options </a> </li>
+      */
+[I'm an inline-style link with title](https://www.google.com "Google's Homepage")
 * Demo 1
 * Demo 2
 * Demo 3

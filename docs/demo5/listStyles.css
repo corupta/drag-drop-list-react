@@ -1,0 +1,103 @@
+.list {
+    display: inline-block;
+    width: 160px;
+    vertical-align: top;
+    height: 600px;
+    border: 2px black solid;
+    margin: 10px;
+}
+.item {
+    letter-spacing: 0.4px;
+    text-shadow: 2px 2px 2px #222222;
+    margin: 12px auto;
+    width: calc(100% - 32px);
+    border: 3px solid;
+    color: white;
+    border-radius: 6px;
+    padding: 4px;
+}
+.list ul {
+    letter-spacing: 0.3px;
+    padding: 4px;
+    list-style-type: none;
+    text-align: center;
+    height: 100%;
+    margin: 0;
+    color: white;
+}
+.list li {
+    text-shadow: 2px 2px 2px #222222;
+    font-size: 10px;
+    font-weight: bold;
+    margin: 16px 4px;
+}
+.list0 {
+    background: #dda688;
+}
+.list0 .item {
+    background: #cd794c;
+    border-color: #802d00;
+}
+.list0 ul {
+    background-color: #af501d;
+}
+.list1 {
+    background: #93a1d2;
+}
+.list1 .item {
+    background: #5d72bb;
+    border-color: #0e2471;
+}
+.list1 ul {
+    background-color: #2b44a1;
+}
+.list2 {
+    background: #ddd888;
+}
+.list2 .item {
+    background: #cdc44c;
+    border-color: #807700;
+}
+.list2 ul {
+    background-color: #afa61d;
+}
+.list3 {
+    background: #D58EB0;
+}
+.list3 .item {
+    background: #c1578a;
+    border-color: #80003e;
+}
+.list3 ul {
+    background-color: #83164b;
+}
+.list4 {
+    background: #8cd9c2;
+}
+.list4 .item {
+    background: #53c6a3;
+    border-color: #008059;
+}
+.list4 ul {
+    background-color: #1eae83;
+}
+.list5 {
+    background: #eac77b;
+}
+.list5 .item {
+    background: #dfab3a;
+    border-color: #805900;
+}
+.list5 ul {
+    background-color: #af811d;
+}
+.list6 {
+    background: #b390d5;
+}
+.list6 .item {
+    background: #8c59c0;
+    border-color: #420877;
+}
+.list6 ul {
+    background-color: #6627a5;
+}

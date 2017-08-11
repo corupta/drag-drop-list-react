@@ -1,0 +1,80 @@
+.group {
+    border: 3px black solid;
+    padding: 16px;
+
+}
+.group0 {
+    background: #f3d8d9;
+}
+.group1 {
+    background: #ffeacc;
+
+}
+.group2 {
+    background: #ddf0db;
+
+}
+.group3 {
+    background: #e0e6eb;
+}
+.group4 {
+    background: #f3d8d9;
+}
+.list {
+    display: inline-block;
+    width: 160px;
+    height: 600px;
+    border: 2px solid black;
+    margin: 12px;
+}
+.group0 .list:nth-child(odd) {
+    background: #f0a8ab;
+}
+.group0 .list:nth-child(even) {
+    background: #e7b1b4;
+}
+.group1 .list:nth-child(odd) {
+    background: #f1d2a7;
+}
+.group1 .list:nth-child(even) {
+    background: #e8d2b0;
+}
+.group2 .list:nth-child(odd) {
+    background: #aff1a7;
+}
+.group2 .list:nth-child(even) {
+    background: #bedeba;
+}
+.group3 .list:nth-child(odd) {
+    background: #accdec;
+}
+.group3 .list:nth-child(even) {
+    background: #bdcddb;
+}
+.group4 .list:nth-child(odd) {
+    background: #f0a8ab;
+}
+.group4 .list:nth-child(even) {
+    background: #e7b1b4;
+}
+.item{
+    border: 2px black solid;
+    border-radius: 4px;
+    margin: 8px auto;
+    padding: 12px;
+}
+.group0 .item {
+    background: #e97c82;
+}
+.group1 .item {
+    background: #eabc7b;
+}
+.group2 .item {
+    background: #86ea7b;
+}
+.group3 .item {
+    background: #82b4e3;
+}
+.group4 .item {
+    background: #e97c82;
+}
