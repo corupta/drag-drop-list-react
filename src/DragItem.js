@@ -91,7 +91,7 @@ export default class DragItem extends React.Component {
       } else {
         rel = { left: stl.left - e.clientX, top: stl.top - e.clientY };
       }
-      this.props.setRelatives(rel);
+      this.props.setRelatives(stl, rel);
       this.props.onSthDown(this.props.myId, stl, p, e, this.me,  { width: this.width, height: this.height });
     }
   }

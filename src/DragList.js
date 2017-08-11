@@ -281,7 +281,7 @@ export default class DragList extends React.Component {
       }
       this.maybeScrollPage();
       dragData.upState({
-        currX: dragData.ePos.x + dragData.relativeX,
+        currX: (this.props.lockX ? 0 : dragData.ePos.x + dragData.relativeX),
         currY: dragData.ePos.y + dragData.relativeY
       });
       setTimeout(this.startScrollInterval, this.scrollDetails.time);
@@ -558,7 +558,7 @@ export default class DragList extends React.Component {
           setHeight={this.setHeight}
           trans={{ H: ( this.blocker !== -1 && i >= this.blocker ? this.blankHeight : 0), dur: this.transitionDuration }}
           key={i}
-          setRelatives={(stl) => { dragData.relativeX = stl.left; dragData.relativeY = stl.top; }}
+          setRelatives={(stl, rel) => { if (this.props.lockX) { dragData.relativeX = stl.left; } else { dragData.relativeX = rel.left; } dragData.relativeY = rel.top; }}
           onSthDown={this.handleStart}
           onSthEnter={this.handleEnterItem}
           onsupermove={this.moveFlyingScrollList}
@@ -603,5 +603,6 @@ DragList.PropTypes = {
   scrollSpeed: PropTypes.number,
   delayOnTouch: PropTypes.number,
   delayOnMouse: PropTypes.number,
-  rotateFlying: PropTypes.bool
+  rotateFlying: PropTypes.bool,
+  lockX: PropTypes.bool
 };

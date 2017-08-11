@@ -90,6 +90,7 @@ export default class DragDrop extends React.Component {
           delayOnTouch={this.props.delayOnTouch}
           delayOnMouse={this.props.delayOnMouse}
           rotateFlying={this.props.rotateFlying}
+          lockX={this.props.lockX}
         >
           {this.props.children}
         </DragList>
@@ -119,7 +120,8 @@ DragList.PropTypes = {
   scrollSpeed: PropTypes.number,
   delayOnTouch: PropTypes.number,
   delayOnMouse: PropTypes.number,
-  rotateFlying: PropTypes.bool
+  rotateFlying: PropTypes.bool,
+  lockX: PropTypes.bool
 };
 
 DragList.defaultProps = {
@@ -131,7 +133,8 @@ DragList.defaultProps = {
   // at least 12 or you are probably going to have some issues on mobile devices
   delayOnTouch: 400,
   delayOnMouse: 0,
-  rotateFlying: true
+  rotateFlying: true,
+  lockX: false
 };
 /*
 clone: true => clone

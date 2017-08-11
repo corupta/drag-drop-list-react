@@ -27,6 +27,7 @@ Check out the awesome, and very easy to use react component for creating a dragd
     - [`delayOnTouch` option:](#delayontouch-option)
     - [`delayOnMouse` option:](#delayonmouse-option)
     - [`rotateFlying` option:](#rotateflying-option)
+    - [`lockX` option:](#lockx-option)
 - [Children](#children)
 - [Understanding How It Works](#understanding-how-it-works) 
 
@@ -77,6 +78,8 @@ What's more, you can use `import DragList, { getKey() } from 'DragList'` to also
 |   **delayOnTouch**  |                    `400`                      |                   Number                   |*Optional* |
 |  **delayOnMouse**   |                     `0`                       |                   Number                   |*Optional* |
 |  **rotateFlying**   |                    `True`                     |                    Bool                    |*Optional* |
+|      **lockX**      |                   `False`                     |                    Bool                    |*Optional* |
+
 
 <!---
 ```
@@ -324,6 +327,13 @@ An optional bool, specifying whether or not items dragged from this list should 
 Default is true.
 
 Contact me if you think you need a rotation other than 6 degree, I can change this value to a number in a future release, so that it would specify the number of degrees.
+
+
+### `lockX` option:
+
+When an item from a DragDrop list whose `lockX` prop is set to true is dragged, it's x value, never changes. Meaning it's x value is locked.
+
+Default is false.
 
 
 ## Children
