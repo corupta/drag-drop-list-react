@@ -35,19 +35,14 @@ Check out the awesome, and very easy to use react component for creating a dragd
 
 Check out those demos, to see what that package looks like:
       
-      /*<li> <a href='demo2' target='_blank'> Demo 2 - Shopping List </a> </li>
-      <li> <a href='demo3' target='_blank'> Demo 3 - Drag & Drop Props </a> </li>
-      <li> <a href='demo4' target='_blank'> Demo 4 - Profile Page </a> </li>
-      <li> <a href='demo5' target='_blank'> Demo 5 - Drag & Drop Props 2 </a> </li>
-      <li> <a href='demo6' target='_blank'> Demo 6 - Drag & Drop & Input </a> </li>
-      <li> <a href='demo7' target='_blank'> Demo 7 - Drag & Drop Other Options </a> </li>
-      */
-      
-[All Demos](//github.io/corupta/drag-drop-list-react/docs "All Demos")
-[I'm an inline-style link with title](https://www.google.com "Google's Homepage")
-* Demo 1
-* Demo 2
-* Demo 3
+[All Demos](//github.io/corupta/drag-drop-list-react "All Demos")
+
+* [Shopping List](//github.io/corupta/drag-drop-list-react/demo2 "Shopping List")
+* [Drag & Drop Props](//github.io/corupta/drag-drop-list-react/demo3 "Drag & Drop Props")
+* [Profile Page](//github.io/corupta/drag-drop-list-react/demo4 "Profile Page")
+* [Drag & Drop Props 2](//github.io/corupta/drag-drop-list-react/demo5 "Drag & Drop Props 2")
+* [Drag & Drop & Input](//github.io/corupta/drag-drop-list-react/demo6 "Drag & Drop & Input")
+* [Drag & Drop Other Options](//github.io/corupta/drag-drop-list-react/demo7 "Drag & Drop Other Options")
 
 
 ## Installing
