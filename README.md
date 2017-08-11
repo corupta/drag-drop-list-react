@@ -35,14 +35,14 @@ Check out the awesome, and very easy to use react component for creating a dragd
 
 Check out those demos, to see what that package looks like:
       
-[All Demos](//github.io/corupta/drag-drop-list-react "All Demos")
+[All Demos](//corupta.github.io/drag-drop-list-react "All Demos")
 
-* [Shopping List](//github.io/corupta/drag-drop-list-react/demo2 "Shopping List")
-* [Drag & Drop Props](//github.io/corupta/drag-drop-list-react/demo3 "Drag & Drop Props")
-* [Profile Page](//github.io/corupta/drag-drop-list-react/demo4 "Profile Page")
-* [Drag & Drop Props 2](//github.io/corupta/drag-drop-list-react/demo5 "Drag & Drop Props 2")
-* [Drag & Drop & Input](//github.io/corupta/drag-drop-list-react/demo6 "Drag & Drop & Input")
-* [Drag & Drop Other Options](//github.io/corupta/drag-drop-list-react/demo7 "Drag & Drop Other Options")
+* [Shopping List](//corupta.github.io/drag-drop-list-react/demo2 "Shopping List")
+* [Drag & Drop Props](//corupta.github.io/drag-drop-list-react/demo3 "Drag & Drop Props")
+* [Profile Page](//corupta.github.io/drag-drop-list-react/demo4 "Profile Page")
+* [Drag & Drop Props 2](//corupta.github.io/drag-drop-list-react/demo5 "Drag & Drop Props 2")
+* [Drag & Drop & Input](//corupta.github.io/drag-drop-list-react/demo6 "Drag & Drop & Input")
+* [Drag & Drop Other Options](//corupta.github.io/drag-drop-list-react/demo7 "Drag & Drop Other Options")
 
 
 ## Installing
