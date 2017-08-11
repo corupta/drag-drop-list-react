@@ -86,7 +86,8 @@ const itemStyle = {
   borderTop: 0,
   borderLeft: 0,
   borderRight: 0,
-  background: '#bbf7de'
+  background: '#bbf7de',
+  userSelect: 'none'
 };
 
 const buildItemStyle = {
@@ -95,7 +96,8 @@ const buildItemStyle = {
   padding: '8px 0',
   borderTop: '1px #dcefe7 solid',
   color: '#dcefe7',
-  background: '#153A6D'
+  background: '#153A6D',
+  userSelect: 'none'
 };
 
 export default class App extends React.Component {
