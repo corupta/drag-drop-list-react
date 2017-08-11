@@ -290,12 +290,6 @@ export default class App extends React.Component {
   render() {
     return (
       <div style={this.state.editMode ? bigMainStyle : mainStyle}>
-        <div style={{ textAlign: 'left', color: '#fff8e6', textShadow: '1px 2px #444444', letterSpacing: 1 }}>
-          <span>
-            &nbsp;&nbsp; JotForm Made in China &nbsp;
-            <i>(Yekta'ya özel)</i>
-          </span>
-        </div>
         <SwitchButton editMode={this.state.editMode} switchMode={ this.switchMode }/>
         <br />
         {this.state.editMode && <DragDrop myGid={-1} style={leftListStyle} dragName='abc'>{this.createMapItems(this.state.list, true, true)}</DragDrop>}
