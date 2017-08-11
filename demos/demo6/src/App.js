@@ -137,16 +137,16 @@ export default class App extends React.Component {
   render() {
     return (
       <div style={mainStyle}>
-        <DragDrop myGid={0} style={listStyle[0]} topElem={topElems[0]} bottomElem={this.bottomElems[0]} dragName='abc' removeItem={this.removeItem}>
+        <DragDrop myGid={0} style={listStyle[0]} itemClass='item' topElem={topElems[0]} bottomElem={this.bottomElems[0]} dragName='abc' removeItem={this.removeItem}>
           {this.state.items[0]}
         </DragDrop>
-        <DragDrop myGid={1} style={listStyle[1]} topElem={topElems[1]} bottomElem={this.bottomElems[1]} dragName='abc'>
+        <DragDrop myGid={1} style={listStyle[1]} itemClass='item' topElem={topElems[1]} bottomElem={this.bottomElems[1]} dragName='abc'>
           {this.state.items[1]}
         </DragDrop>
-        <DragDrop myGid={2} style={listStyle[2]} topElem={topElems[2]} bottomElem={this.bottomElems[2]} dropName='abc' dropFunc={this.mutateItem}>
+        <DragDrop myGid={2} style={listStyle[2]} itemClass='item' topElem={topElems[2]} bottomElem={this.bottomElems[2]} dropName='abc' dropFunc={this.mutateItem}>
           {this.state.items[2]}
         </DragDrop>
-        <DragDrop myGid={3} style={listStyle[3]} topElem={topElems[3]} bottomElem={this.bottomElems[3]} dropName='abc'>
+        <DragDrop myGid={3} style={listStyle[3]} itemClass='item' topElem={topElems[3]} bottomElem={this.bottomElems[3]} dropName='abc'>
           {this.state.items[3]}
         </DragDrop>
       </div>

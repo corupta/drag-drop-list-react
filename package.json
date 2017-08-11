@@ -1,6 +1,6 @@
 {
   "name": "drag-drop-list-react",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "A library that implements drag-drop lists for react.",
   "main": "./dist/index.js",
   "dependencies": {

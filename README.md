@@ -245,6 +245,11 @@ Similar to most `className` props, this option is used to pass class name string
 
 Similar to most `className` props, this option is used to pass class name string to the items in the list. Optional.
 
+When, you are using this option, be careful that the items you passed via the children prop take className props. 
+Meaning, either they are JSX objects that take a className prop, or HTML objects (which by default take a className prop)
+
+Failure to do so would result in such items not having the passed itemClass prop as the class property. (Other items can still be fine)
+
 
 ### `topElem` option:
 
@@ -294,7 +299,9 @@ An optional number specifying number of milliseconds, the user must keep touchin
 
 (Stopping touch, moving touch out of item, etc. during this delay will prevent the item from being dragged.)
 
-It is a good idea to use this when there's no margin in a list, but a user has to be able to scroll the list without dragging an item.
+It is a good idea to use this when there is no margin in a list, but a user has to be able to scroll the list without dragging an item.
+
+Another, good use for this option is when one or more of your items in this list have at least one input.
 
 Default value is 400.
 
@@ -305,7 +312,7 @@ An optional number specifying number of milliseconds, the user must keep pressin
 
 (Stopping to press, moving mouse out of item, etc. during this delay will prevent the item from being dragged.)
 
-Honestly, I'm not sure, what would be a good use case for this. I've only implemented this feature because, I've also implemented it for a touch version.
+It is a good idea to use this when  one or more of your items in this list have at least one input.
 
 Default value is 0.
 
@@ -337,3 +344,56 @@ That's a very very simple use case. Items in the DragDrop List should be given a
 Check out the codes of the demos, to see some examples and get a basic understanding of how this library works.
 
 I'm trying to make it as extensive as possible, so feel free to contact me if you are looking for some new features.
+
+Here are some notes, that may help your reasoning about this library:
+
+- `clone: true` means there is no remove function.
+- `clone: false` means there is a remove function.
+
+
+- `scrollable: true` means dragName and dropName are the same, and different from empty string.
+- `scrollable: false` means dragName and dropName are not the same or they are both empty strings.
+
+
+- It is meaningless to pass an insertItem function if the dragName is empty.
+- Giving an empty dragName means items in the list are not draggable.
+- (The list can still be droppable)
+
+
+- It is meaningless to pass a removeItem function or dropFunc function if the dropName is empty.
+- Giving an empty dropName means the list is not droppable.
+- (The items in the list can still be draggable)
+
+
+- Important Note: If you are going to use overflow style for the list, don't put it in the class, but the list itself via the style prop.
+
+- Implementing a trash list:
+
+    - Make a list with no dragName but with a dropName.
+    - Don't pass an insert function.
+    - You will probably want to implement a dropFunc function.
+    - That's because, although the list is a trashlist (whatever gets dropped is destroyed) there is a blank (ghost) item seen on the list when you drag an item over but do not drop. 
+    - (This blank item is determined by the dropFunc function)
+
+
+- Implementing dragDropListception:
+    
+    - A DragDropList can have another DragDropList as its item. 
+    - However, beware that requires extra implementation for you.
+    - That's because, when an item is dropped to a DragDropList inside another, you need to update both the item and the parent DragDropList.
+    - What's more your dropFunc function must make a new gid (myGid prop), everytime the child DragDropList is copied.
+
+
+- Creating a grid of items:
+    
+    - Sorry, that's not possible right now.
+    - Your items can have different height / width / margin / paddings.
+    - But, the current version only supports creating horizontal lists.
+    - I may implement a vertical version later, contact me if you are interested in this.
+    - Yet, implementing a version that can have items with different widths/heights/margins as a grid is very hard.
+    - (That will probably require me to write another virtual DOM alongisde react's)
+    - What's more, I'm not sure how this should act like.
+    - (For example, are items going to fill up spaces between others, and etc.)
+    - Contact me, if you have any ideas, or want such feature.
+    - Note: Implementing a version for creating a grid of items with same width / height / margin is very easy actually.
+    - So, contact me if you are interested in such feature.

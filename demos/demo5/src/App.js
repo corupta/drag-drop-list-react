@@ -133,13 +133,27 @@ export default class App extends React.Component {
   render() {
     return (
       <div style={mainStyle}>
-        <DragDrop bottomElem={listDetails[0]} myGid={0} class='list list0' insertItem={this.insertItem} removeItem={this.removeItem} dragName='a' dropName='c'>{this.state.items[0]}</DragDrop>
-        <DragDrop bottomElem={listDetails[1]} myGid={1} class='list list1' insertItem={this.insertItem} dragName='b' dropName='a'>{this.state.items[1]}</DragDrop>
-        <DragDrop bottomElem={listDetails[2]} myGid={2} class='list list2' insertItem={this.insertItem} removeItem={this.removeItem} dragName='c' dropName='b'>{this.state.items[2]}</DragDrop>
-        <DragDrop bottomElem={listDetails[3]} myGid={3} class='list list3' insertItem={this.insertItem} dragName='b' dropName='c'>{this.state.items[3]}</DragDrop>
-        <DragDrop bottomElem={listDetails[4]} myGid={4} class='list list4' removeItem={this.removeItem} dropName='c'>{this.state.items[4]}</DragDrop>
-        <DragDrop bottomElem={listDetails[5]} myGid={5} class='list list5' insertItem={this.insertItem} dragName='c' dropName='c'>{this.state.items[5]}</DragDrop>
-        <DragDrop bottomElem={listDetails[6]} myGid={6} class='list list6' insertItem={this.insertItem} removeItem={this.removeItem} dragName='c' dropName='c'>{this.state.items[6]}</DragDrop>
+        <DragDrop bottomElem={listDetails[0]} myGid={0} class='list list0' itemClass='item' insertItem={this.insertItem} removeItem={this.removeItem} dragName='a' dropName='c'>
+          {this.state.items[0]}
+        </DragDrop>
+        <DragDrop bottomElem={listDetails[1]} myGid={1} class='list list1' itemClass='item' insertItem={this.insertItem} dragName='b' dropName='a'>
+          {this.state.items[1]}
+        </DragDrop>
+        <DragDrop bottomElem={listDetails[2]} myGid={2} class='list list2' itemClass='item' insertItem={this.insertItem} removeItem={this.removeItem} dragName='c' dropName='b'>
+          {this.state.items[2]}
+        </DragDrop>
+        <DragDrop bottomElem={listDetails[3]} myGid={3} class='list list3' itemClass='item' insertItem={this.insertItem} dragName='b' dropName='c'>
+          {this.state.items[3]}
+        </DragDrop>
+        <DragDrop bottomElem={listDetails[4]} myGid={4} class='list list4' itemClass='item' removeItem={this.removeItem} dropName='c'>
+          {this.state.items[4]}
+        </DragDrop>
+        <DragDrop bottomElem={listDetails[5]} myGid={5} class='list list5' itemClass='item' insertItem={this.insertItem} dragName='c' dropName='c'>
+          {this.state.items[5]}
+        </DragDrop>
+        <DragDrop bottomElem={listDetails[6]} myGid={6} class='list list6' itemClass='item' insertItem={this.insertItem} removeItem={this.removeItem} dragName='c' dropName='c'>
+          {this.state.items[6]}
+        </DragDrop>
       </div>
     );
   }

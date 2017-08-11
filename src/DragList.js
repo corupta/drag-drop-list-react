@@ -36,10 +36,6 @@ let dragData = {
 
 const defaultScrollStep = 24;
 
-const scrollDetails = {
-  step: -1,
-  time: 32
-};
 
 let scrollBugFix = true;
 
@@ -68,7 +64,7 @@ export default class DragList extends React.Component {
     this.itemHeights = [];
     this.itemMarginTops = [];
     this.itemMarginBottoms = [];
-    scrollDetails.step = Math.round(defaultScrollStep * (nextProps.scrollSpeed === 'undefined' ? this.props.scrollSpeed : nextProps.scrollSpeed));
+    this.scrollDetails.step = Math.round(defaultScrollStep * (nextProps.scrollSpeed === 'undefined' ? 1.00 : nextProps.scrollSpeed));
     this.clone = typeof nextProps.removeItem === 'undefined';
   }
   getListProps() {
@@ -98,6 +94,10 @@ export default class DragList extends React.Component {
     this.downNo = 0;
     this.initalElem = null;
     this.blankHeightTmp = -1;
+    this.scrollDetails = {
+      step: -1,
+      time: 32
+    };
   }
   initializeBindings() {
     this.setHeight = this.setHeight.bind(this);
@@ -241,16 +241,16 @@ export default class DragList extends React.Component {
     const pageH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight) - window.innerHeight;
     const pageW = Math.max(document.body.scrollWidth, document.documentElement.scrollWidth) - window.innerWidth;
     if (dragData.ePos.x - this.props.scrollWhen < 0) {
-      window.scrollTo(Math.max(0, currX - scrollDetails.step), currY);
+      window.scrollTo(Math.max(0, currX - this.scrollDetails.step), currY);
     }
     if (dragData.ePos.y - this.props.scrollWhen < 0) {
-      window.scrollTo(currX, Math.max(0, currY - scrollDetails.step));
+      window.scrollTo(currX, Math.max(0, currY - this.scrollDetails.step));
     }
     if (dragData.ePos.x + this.props.scrollWhen > window.innerWidth) {
-      window.scrollTo(Math.min(pageW, currX + scrollDetails.step), currY);
+      window.scrollTo(Math.min(pageW, currX + this.scrollDetails.step), currY);
     }
     if (dragData.ePos.y + this.props.scrollWhen > window.innerHeight) {
-      window.scrollTo(currX, Math.min(pageH, scrollDetails.step + currY));
+      window.scrollTo(currX, Math.min(pageH, this.scrollDetails.step + currY));
     }
   }
   maybeScrollList() {
@@ -262,16 +262,16 @@ export default class DragList extends React.Component {
       bottom: getRect.bottom - this.bottomMargin
     };
     if (dragData.ePos.x - this.props.scrollWhen < realStl.left) {
-      this.me.scrollLeft = Math.max(0, this.me.scrollLeft - scrollDetails.step);
+      this.me.scrollLeft = Math.max(0, this.me.scrollLeft - this.scrollDetails.step);
     }
     if (dragData.ePos.y - this.props.scrollWhen < realStl.top) {
-      this.me.scrollTop = Math.max(0, this.me.scrollTop - scrollDetails.step);
+      this.me.scrollTop = Math.max(0, this.me.scrollTop - this.scrollDetails.step);
     }
     if (dragData.ePos.x + this.props.scrollWhen > realStl.right) {
-      this.me.scrollLeft = Math.min(this.me.scrollWidth, this.me.scrollLeft + scrollDetails.step);
+      this.me.scrollLeft = Math.min(this.me.scrollWidth, this.me.scrollLeft + this.scrollDetails.step);
     }
     if (dragData.ePos.y + this.props.scrollWhen > realStl.bottom) {
-      this.me.scrollTop = Math.min(this.me.scrollHeight, this.me.scrollTop + scrollDetails.step);
+      this.me.scrollTop = Math.min(this.me.scrollHeight, this.me.scrollTop + this.scrollDetails.step);
     }
   }
   startScrollInterval() {
@@ -284,7 +284,7 @@ export default class DragList extends React.Component {
         currX: dragData.ePos.x + dragData.relativeX,
         currY: dragData.ePos.y + dragData.relativeY
       });
-      setTimeout(this.startScrollInterval, scrollDetails.time);
+      setTimeout(this.startScrollInterval, this.scrollDetails.time);
     }
   }
   moveFlying(item, listScrollCallback, newListId, newId, offset) {
