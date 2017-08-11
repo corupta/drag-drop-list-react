@@ -457,7 +457,7 @@ export default class DragList extends React.Component {
       dragData.upState = this.setState;
       this.handleStartEvents();
       if (this.props.dragName === this.props.dropName) {
-        this.blank = (typeof this.props.dropFunc === 'undefined' ? dragData.item : this.props.dropFunc(this.props.myGid, dragData.item));
+        this.blank = (typeof this.props.dropFunc === 'undefined' ? dragData.item : this.props.dropFunc(dragData.item, this.props.myGid));
         this.blocker = id + (this.clone === true ? 0 : 1);
         this.blankHeight = this.calculateBlankHeight(id - 1, this.blocker);
         this.blankHeightTmp = 0;
