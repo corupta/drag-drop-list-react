@@ -43,7 +43,7 @@ Check out those demos, to see what that package looks like:
       <li> <a href='demo7' target='_blank'> Demo 7 - Drag & Drop Other Options </a> </li>
       */
       
-[All Demos](//github.io/corupta/docs/, "All Demos")
+[All Demos](//github.io/corupta/docs "All Demos")
 [I'm an inline-style link with title](https://www.google.com "Google's Homepage")
 * Demo 1
 * Demo 2
