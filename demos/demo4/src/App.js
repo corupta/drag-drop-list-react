@@ -20,7 +20,9 @@ const mainStyle = {
   border: '2px #7E5B00 solid',
   margin: 'auto',
   textAlign: 'center',
-  padding: 20
+  padding: 20,
+  boxShadow: '0 0 24px #888888',
+  WebkitBoxShadow: '0 0 24px #888888'
 };
 
 const bigMainStyle = {

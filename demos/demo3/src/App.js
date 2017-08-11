@@ -160,7 +160,7 @@ const itemBaseStyle = {
   //textAlign: 'left',
   //letterSpacing: '0.2em',
   textAlign: 'left',
-  textShadow: '2px 2px #222222',
+  textShadow: '2px 2px 2px #222222',
   margin: '6px auto',
   borderStyle: 'groove',
   borderWidth: 2,

@@ -1,69 +1,61 @@
+.group {
+    border: 3px black solid;
+    padding: 16px;
+
+}
+.group0 {
+    background: #f3d8d9;
+}
+.group1 {
+    background: #ffeacc;
+
+}
+.group2 {
+    background: #ddf0db;
+
+}
+.group3 {
+    background: #e0e6eb;
+}
+.group4 {
+    background: #f3d8d9;
+}
 .list {
     display: inline-block;
-    width: 200px;
+    width: 160px;
     height: 600px;
     border: 2px solid black;
-    margin: 20px;
+    margin: 12px;
 }
-.list0 {
-
+.group0 .list:nth-child(odd) {
+    background: #f0a8ab;
 }
-.list1 {
-
+.group0 .list:nth-child(even) {
+    background: #e7b1b4;
 }
-.list2 {
-
+.group1 .list:nth-child(odd) {
+    background: #f1d2a7;
 }
-.list3{
-
+.group1 .list:nth-child(even) {
+    background: #e8d2b0;
 }
-.list4{
-
+.group2 .list:nth-child(odd) {
+    background: #aff1a7;
 }
-.list5{
-
+.group2 .list:nth-child(even) {
+    background: #bedeba;
 }
-.list6{
-
+.group3 .list:nth-child(odd) {
+    background: #accdec;
 }
-.list7{
-
+.group3 .list:nth-child(even) {
+    background: #bdcddb;
 }
-.list8 {
-
+.group4 .list:nth-child(odd) {
+    background: #f0a8ab;
 }
-.list9 {
-
-}
-.list10 {
-
-}
-.list11{
-
-}
-.list12{
-
-}
-.list13{
-
-}
-.list14{
-
-}
-.list15{
-
-}
-.list16 {
-
-}
-.list17 {
-
-}
-.list18 {
-
-}
-.list19{
-
+.group4 .list:nth-child(even) {
+    background: #e7b1b4;
 }
 .item{
     border: 2px black solid;
@@ -71,63 +63,18 @@
     margin: 8px auto;
     padding: 12px;
 }
-.item0{
-
+.group0 .item {
+    background: #e97c82;
 }
-.item1{
-
+.group1 .item {
+    background: #eabc7b;
 }
-.item2{
-
+.group2 .item {
+    background: #86ea7b;
 }
-.item3{
-
+.group3 .item {
+    background: #82b4e3;
 }
-.item4{
-
-}
-.item5{
-
-}
-.item6{
-
-}
-.item7{
-
-}
-.item8{
-
-}
-.item9{
-
-}
-.item10{
-
-}
-.item11{
-
-}
-.item12{
-
-}
-.item13{
-
-}
-.item14{
-
-}
-.item15{
-
-}
-.item16{
-
-}
-.item17{
-
-}
-.item18{
-
-}
-.item19{
-
+.group4 .item {
+    background: #e97c82;
 }

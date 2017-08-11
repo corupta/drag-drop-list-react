@@ -35,7 +35,7 @@ const listProps = [
   ],
   [
     { delayOnMouse: 0, delayOnTouch: 0, key: getKey() },
-    { delayOnMouse: 100, delayOnTouch: 100, key: getKey() },
+    { delayOnMouse: 200, delayOnTouch: 200, key: getKey() },
     { delayOnMouse: 400, delayOnTouch: 400, key: getKey() },
     { delayOnMouse: 800, delayOnTouch: 800, key: getKey() },
     { delayOnMouse: 1600, delayOnTouch: 1600, key: getKey() }
@@ -109,8 +109,8 @@ const listDetails = [
     ),
     (
       <ul>
-        <li>delayOnMouse: 100</li>
-        <li>delayOnTouch: 100</li>
+        <li>delayOnMouse: 200</li>
+        <li>delayOnTouch: 200</li>
       </ul>
     ),
     (
@@ -375,7 +375,9 @@ export default class App extends React.Component {
     for (let i = 0; i < allItems.length; ++i) {
       for (let j = 0; j < allItems[i].length; ++j, ++t) {
         _items[t] = [];
-        allItems[i][j].map((item, k) => (_items[t][k] = <h3 key={ getKey() }>{item}</h3>));
+        for (let k = 0; k < allItems[i][j].length; ++k) {
+          _items[t][k] = <h3 key={ getKey() }>{allItems[i][j][k]}</h3>;
+        }
       }
     }
     this.setState({
@@ -412,7 +414,7 @@ export default class App extends React.Component {
       <div className='main'>
         {listDetails.map((lists, i) => {
           return (
-            <div key={ mainKeys[i] }>
+            <div className={`group group${i}`} key={ mainKeys[i] }>
               <h2>{optionsInfos[i]}</h2>
               {lists.map((item, j) => {;
                 const p = t ++;
@@ -433,7 +435,6 @@ export default class App extends React.Component {
                   this.state.items[p]
                 );
               })}
-              <hr />
             </div>
           );
         })}

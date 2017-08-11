@@ -1,13 +1,19 @@
 import React from 'react';
-import DragDrop, { getKey } from 'drag-drop-list-react';
+import DragDrop, { getKey } from 'drag-drop-list-react';//'./src/index';
 
 const mainStyle = {
-  padding: 32,
-  background: '#aaaaaa',
-  width: 940,
+  padding: 10,
+  background: '#d3f0a8',
+  width: 1300,
   textAlign: 'center',
-  margin: 'auto',
-  border: '1px solid black'
+  margin: '40px auto',
+  border: '1px solid black',
+  boxShadow: '0 0 24px #888888',
+  WebkitBoxShadow: '0 0 24px #888888'
+};
+
+const overflowFix = {
+  overflow: 'auto'
 };
 
 const listDetails = [
@@ -109,7 +115,7 @@ export default class App extends React.Component {
   insertItem(item, myGid, myId) {
     const _allItems = [...this.state.items];
     const _items = [..._allItems[myGid]];
-    for (let i = _allItems.length; i > myId; --i) {
+    for (let i = _allItems[myGid].length; i > myId; --i) {
       _items[i] = _items[i - 1];
     }
     _items[myId] = item;
@@ -133,25 +139,25 @@ export default class App extends React.Component {
   render() {
     return (
       <div style={mainStyle}>
-        <DragDrop bottomElem={listDetails[0]} myGid={0} class='list list0' itemClass='item' insertItem={this.insertItem} removeItem={this.removeItem} dragName='a' dropName='c'>
+        <DragDrop bottomElem={listDetails[0]} style={overflowFix} myGid={0} class='list list0' itemClass='item' insertItem={this.insertItem} removeItem={this.removeItem} dragName='a' dropName='c'>
           {this.state.items[0]}
         </DragDrop>
-        <DragDrop bottomElem={listDetails[1]} myGid={1} class='list list1' itemClass='item' insertItem={this.insertItem} dragName='b' dropName='a'>
+        <DragDrop bottomElem={listDetails[1]} style={overflowFix} myGid={1} class='list list1' itemClass='item' insertItem={this.insertItem} dragName='b' dropName='a'>
           {this.state.items[1]}
         </DragDrop>
-        <DragDrop bottomElem={listDetails[2]} myGid={2} class='list list2' itemClass='item' insertItem={this.insertItem} removeItem={this.removeItem} dragName='c' dropName='b'>
+        <DragDrop bottomElem={listDetails[2]} style={overflowFix} myGid={2} class='list list2' itemClass='item' insertItem={this.insertItem} removeItem={this.removeItem} dragName='c' dropName='b'>
           {this.state.items[2]}
         </DragDrop>
-        <DragDrop bottomElem={listDetails[3]} myGid={3} class='list list3' itemClass='item' insertItem={this.insertItem} dragName='b' dropName='c'>
+        <DragDrop bottomElem={listDetails[3]} style={overflowFix} myGid={3} class='list list3' itemClass='item' insertItem={this.insertItem} dragName='b' dropName='c'>
           {this.state.items[3]}
         </DragDrop>
-        <DragDrop bottomElem={listDetails[4]} myGid={4} class='list list4' itemClass='item' removeItem={this.removeItem} dropName='c'>
+        <DragDrop bottomElem={listDetails[4]} style={overflowFix} myGid={4} class='list list4' itemClass='item' removeItem={this.removeItem} dropName='c'>
           {this.state.items[4]}
         </DragDrop>
-        <DragDrop bottomElem={listDetails[5]} myGid={5} class='list list5' itemClass='item' insertItem={this.insertItem} dragName='c' dropName='c'>
+        <DragDrop bottomElem={listDetails[5]} style={overflowFix} myGid={5} class='list list5' itemClass='item' insertItem={this.insertItem} dragName='c' dropName='c'>
           {this.state.items[5]}
         </DragDrop>
-        <DragDrop bottomElem={listDetails[6]} myGid={6} class='list list6' itemClass='item' insertItem={this.insertItem} removeItem={this.removeItem} dragName='c' dropName='c'>
+        <DragDrop bottomElem={listDetails[6]} style={overflowFix} myGid={6} class='list list6' itemClass='item' insertItem={this.insertItem} removeItem={this.removeItem} dragName='c' dropName='c'>
           {this.state.items[6]}
         </DragDrop>
       </div>
