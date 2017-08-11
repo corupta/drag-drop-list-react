@@ -93,21 +93,19 @@ export default class DragItem extends React.Component {
     }
   }
   handleDown(e) {
-    if (this.focusLocker === 0) {
-      const p = e.type === 'touchstart' || (e.type === 'pointerdown' && (e.pointerType === 'pen' || e.pointerType === 'touch'));
-      const t = !p && (e.button === 0);
-      if (p || t) {
-        const getRect = this.me.getBoundingClientRect();
-        const stl = {left: getRect.left, top: getRect.top};
-        let rel;
-        if (p) {
-          rel = {left: stl.left - e.touches.item(0).clientX, top: stl.top - e.touches.item(0).clientY};
-        } else {
-          rel = {left: stl.left - e.clientX, top: stl.top - e.clientY};
-        }
-        this.props.setRelatives(stl, rel);
-        this.props.onSthDown(this.props.myId, stl, p, e, this.me, {width: this.width, height: this.height}, this.getFocusLocker);
+    const p = e.type === 'touchstart' || (e.type === 'pointerdown' && (e.pointerType === 'pen' || e.pointerType === 'touch'));
+    const t = !p && (e.button === 0);
+    if (p || t) {
+      const getRect = this.me.getBoundingClientRect();
+      const stl = {left: getRect.left, top: getRect.top};
+      let rel;
+      if (p) {
+        rel = {left: stl.left - e.touches.item(0).clientX, top: stl.top - e.touches.item(0).clientY};
+      } else {
+        rel = {left: stl.left - e.clientX, top: stl.top - e.clientY};
       }
+      this.props.setRelatives(stl, rel);
+      this.props.onSthDown(this.props.myId, stl, p, e, this.me, {width: this.width, height: this.height}, this.getFocusLocker);
     }
   }
   handleEnter(e) {
