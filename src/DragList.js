@@ -281,7 +281,7 @@ export default class DragList extends React.Component {
       }
       this.maybeScrollPage();
       dragData.upState({
-        currX: (this.props.lockX ? 0 : dragData.ePos.x + dragData.relativeX),
+        currX: (this.props.lockX ? 0 : dragData.ePos.x) + dragData.relativeX,
         currY: dragData.ePos.y + dragData.relativeY
       });
       setTimeout(this.startScrollInterval, this.scrollDetails.time);

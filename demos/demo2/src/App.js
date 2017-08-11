@@ -242,7 +242,7 @@ export default class App extends React.Component {
             {this.state.items[0]}
           </DragDrop>
           <DragDrop myGid={1} dragName='a' dropName='a' dropFunc={this.onDrop} insertItem={this.insertItem} removeItem={this.removeItem}
-                    style={listStyle2} bottomElem={tot1elem} topElem={myCart}>
+                    style={listStyle2} bottomElem={tot1elem} topElem={myCart} lockX={true}>
             {this.state.items[1]}
           </DragDrop>
           <DragDrop myGid={-1} dropName='a' dropFunc={this.onDrop} style={listStyle3} topElem={trash}/>
