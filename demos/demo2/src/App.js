@@ -187,7 +187,7 @@ export default class App extends React.Component {
       items: _allItems
     });
   }
-  removeItem(myGid, myId) {
+  removeItem(myGid, myId, callback) {
     const _items = [...this.state.items[myGid]];
     for (let i = myId; i < _items.length - 1; ++i) {
       _items[i] = _items[i + 1];
@@ -197,7 +197,7 @@ export default class App extends React.Component {
     _allItems[myGid] = _items;
     this.setState({
       items: _allItems
-    });
+    }, callback);
   }
   createSomeItems() {
     const _items = [[],[],[],[]];

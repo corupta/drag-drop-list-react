@@ -194,7 +194,7 @@ export default class App extends React.Component {
       items: _allItems
     });
   }
-  removeItem(myGid, myId) {
+  removeItem(myGid, myId, callback) {
     const _allItems = [...this.state.items];
     const _items = [..._allItems[myGid]];
     for (let i = myId; i < _items.length - 1; ++i) {

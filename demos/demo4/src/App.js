@@ -296,7 +296,7 @@ export default class App extends React.Component {
         <br />
         {this.state.editMode && <DragDrop myGid={-1} style={leftListStyle} dragName='abc'>{this.createMapItems(this.state.list, true, true)}</DragDrop>}
         {this.state.editMode ?
-          (<DragDrop lockX={true} myGid={-2} style={rightListStyle} delayOnMouse={250} dragName='abc' dropName='abc' insertItem={this.insertItem} removeItem={this.removeItem} rotateFlying={false}>
+          (<DragDrop myGid={-2} style={rightListStyle} delayOnMouse={250} dragName='abc' dropName='abc' insertItem={this.insertItem} removeItem={this.removeItem} rotateFlying={false}>
             {this.createMapItems(this.state.items, false, true)}
           </DragDrop>)
           : <div style={rightListStyle}>{this.createMapItems(this.state.items, false, false)}</div>}
