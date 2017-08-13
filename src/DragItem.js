@@ -66,7 +66,13 @@ export default class DragItem extends React.Component {
         setTimeout(this.unlockBlock, this.props.trans.dur, blockLocker);
       }
       ans.transitionDuration = `${this.props.trans.dur}ms`;
+      ans.WebkitTouchCallout = 'none';
+      ans.WebkitUserSelect = 'none';
+      ans.KhtmlUserSelect = 'none';
+      ans.MozUserSelect = 'none';
+      ans.MsUserSelect = 'none';
       ans.userSelect = 'none';
+      ans.touchAction = 'none';
       ans.zIndex = 1;
     }
     return ans;
