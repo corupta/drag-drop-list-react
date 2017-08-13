@@ -279,7 +279,7 @@ export default class App extends React.Component {
       items: _items
     });
   }
-  removeItem(myGid, myId) {
+  removeItem(myGid, myId, callback) {
     const _items = [...this.state.items];
     for (let i = myId; i < _items.length - 1; ++i) {
       _items[i] = _items[i + 1];
@@ -287,7 +287,7 @@ export default class App extends React.Component {
     _items.pop();
     this.setState({
       items: _items
-    });
+    }, callback);
   }
   render() {
     return (
@@ -296,7 +296,7 @@ export default class App extends React.Component {
         <br />
         {this.state.editMode && <DragDrop myGid={-1} style={leftListStyle} dragName='abc'>{this.createMapItems(this.state.list, true, true)}</DragDrop>}
         {this.state.editMode ?
-          (<DragDrop myGid={-2} style={rightListStyle} delayOnMouse={250} dragName='abc' dropName='abc' insertItem={this.insertItem} removeItem={this.removeItem} rotateFlying={false}>
+          (<DragDrop lockX={true} myGid={-2} style={rightListStyle} delayOnMouse={250} dragName='abc' dropName='abc' insertItem={this.insertItem} removeItem={this.removeItem} rotateFlying={false}>
             {this.createMapItems(this.state.items, false, true)}
           </DragDrop>)
           : <div style={rightListStyle}>{this.createMapItems(this.state.items, false, false)}</div>}

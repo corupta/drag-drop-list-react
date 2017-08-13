@@ -330,7 +330,17 @@ export default class DragList extends React.Component {
   }
   moveFlyingBodyHax(e) {
     if (dragData.item !== null) {
-      dragData.ePos = (dragData.isTouchOrMouse ? { x: e.touches.item(0).clientX, y: e.touches.item(0).clientY } : { x: e.clientX, y: e.clientY });
+      if (dragData.isTouchOrMouse) {
+        if (this.props.lockX === false) {
+          dragData.ePos.x = e.touches.item(0).clientX;
+        }
+        dragData.ePos.y = e.touches.item(0).clientY;
+      } else {
+        if (this.props.lockX === false) {
+          dragData.ePos.x = e.clientX;
+        }
+        dragData.ePos.y = e.clientY;
+      }
       e.preventDefault();
       e.stopPropagation();
       if (document.elementFromPoint(dragData.ePos.x, dragData.ePos.y) === null) {
@@ -456,6 +466,9 @@ export default class DragList extends React.Component {
       dragData.scrollListCallback = this.maybeScrollList;
       dragData.upState = this.setState;
       this.handleStartEvents();
+      if (this.props.lockX) {
+        dragData.ePos.x = this.middle;
+      }
       if (this.props.dragName === this.props.dropName) {
         this.blank = (typeof this.props.dropFunc === 'undefined' ? dragData.item : this.props.dropFunc(dragData.item, this.props.myGid));
         this.blocker = id + (this.clone === true ? 0 : 1);
@@ -513,9 +526,18 @@ export default class DragList extends React.Component {
       }
     }
   }
-  dropCallback() {
+  dropCallback(upMe, insertCallback, item, myGid, myId) {
     if (this.draggedId !== -1) {
-      this.props.removeItem(this.props.myGid, this.draggedId);
+      this.props.removeItem(this.props.myGid, this.draggedId, () =>
+        {
+          if (typeof insertCallback !== 'undefined') {
+            insertCallback(item, myGid, myId);
+          }
+        });
+    } else if (typeof insertCallback !== 'undefined') {
+      insertCallback(item, myGid, myId);
+    } else {
+      upMe({});
     }
     this.draggedId = -1;
   }
@@ -528,12 +550,7 @@ export default class DragList extends React.Component {
       this.blankH = -1;
       this.blankHeightTmp = -1;
       this.transitionDuration = 0;
-      dragData.dropCallback();
-      if (typeof this.props.insertItem !== 'undefined') {
-        setTimeout(this.props.insertItem, 4, item, this.props.myGid, id);
-      } else {
-        setTimeout(this.setState, 4, {});
-      }
+      dragData.dropCallback(this.setState, this.props.insertItem, item, this.props.myGid, id);
     }
   }
   addEvents(di) {
@@ -544,6 +561,8 @@ export default class DragList extends React.Component {
       this.topMargin = parseInt(stl.marginTop, 10);
       this.rightMargin = parseInt(stl.marginLeft, 10);
       this.bottomMargin = parseInt(stl.marginTop, 10);
+      const rect = di.getBoundingClientRect();
+      this.middle = rect.left / 2 + rect.right / 2;
       di.addEventListener('leaveMeh', this.handleLeaveList);
       di.addEventListener('enterMeh', this.handleEnterList);
       di.addEventListener('supermove', this.moveFlyingList);

@@ -68,7 +68,7 @@ What's more, you can use `import DragList, { getKey() } from 'DragList'` to also
 |      **myGid**      |                 `Undefined`                   |                   Number                   |*Required* |
 |    **dragName**     |                 `Undefined`                   |                   String                   |*Optional* |
 |    **dropName**     |                 `Undefined`                   |                   String                   |*Optional* |
-|   **removeItem**    |                 `Undefined`                   |           function(myGid, myId)            |*Optional* |
+|   **removeItem**    |                 `Undefined`                   |     function(myGid, myId, callback)        |*Optional* |
 |   **insertItem**    |                 `Undefined`                   |function(dropFunc(item, myGid), myGid, myId)|*Optional* |
 |    **dropFunc**     |`function(item, myGid)`<br />`{ return item; }`|           function(item, myGid)            |*Optional* |
 |      **style**      |                 `Undefined`                   |      React Style Object (camelCased)       |*Optional* |
@@ -147,7 +147,7 @@ insertItem(item, myGid, myId) {
     items: _allItems
   });
 }
-removeItem(myGid, myId) {
+removeItem(myGid, myId, callback) {
   const _items = [...this.state.items[myGid]];
   for (let i = myId; i < _items.length - 1; ++i) {
     _items[i] = _items[i + 1];
@@ -157,7 +157,7 @@ removeItem(myGid, myId) {
   _allItems[myGid] = _items;
   this.setState({
     items: _allItems
-  });
+  }, callback);
 }
 render() {
   return (
@@ -205,7 +205,8 @@ Currently, one list can have only one `dragName` and only one `dropName`. I can 
 
 ### `removeItem` option:
 
-An optional function that is called like `removeItem(myGid, myId);` when an item is removed from the list
+An optional function that is called like `removeItem(myGid, myId, callback);` when an item is removed from the list,
+don't forget to call the callback function (which is used to call insert function if any) in the end, if you have implemented this method.
 
 Don't pass this value if you want to make a list clonable. (Meaning, the items will duplicate when dragged.)
 
