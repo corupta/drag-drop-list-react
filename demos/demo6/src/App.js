@@ -204,7 +204,7 @@ export default class App extends React.Component {
     _allItems[myGid] = _items;
     this.setState({
       items: _allItems
-    });
+    }, callback);
   }
   pushItem(item, myGid) {
     this.insertItem(React.createElement('div', { style: itemStyles[myGid], key: getKey(), dangerouslySetInnerHTML: { __html: item } }), myGid, this.state.items[myGid].length);

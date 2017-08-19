@@ -406,7 +406,7 @@ export default class App extends React.Component {
     _allItems[myGid] = _items;
     this.setState({
       items: _allItems
-    });
+    }, callback);
   }
   render() {
     let t = 0;
